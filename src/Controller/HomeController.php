@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Message;
+use App\Entity\Contact;
 use App\Form\ContactType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,7 +15,7 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $message = new Message();
+        $message = new Contact();
         $form = $this->createForm(ContactType::class, $message);
 
         $form->handleRequest($request);
@@ -42,7 +42,7 @@ class HomeController extends AbstractController
     #[Route('/contact', name: 'contact')]
     public function contact(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $message = new Message();
+        $message = new Contact();
         $form = $this->createForm(ContactType::class, $message);
 
         $form->handleRequest($request);
