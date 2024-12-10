@@ -1,0 +1,39 @@
+<section class="bg-[#121212] text-white py-16" id="contact_us">
+    <div class="max-w-screen-xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Informação de Contacto -->
+        <div>
+            <h2 class="text-4xl font-bold underline mb-6">Contacte-nos</h2>
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold">Fale connosco</h3>
+                <p>Converse com a nossa equipa através do chat ao vivo</p>
+                <ul class="space-y-4 mt-4">
+                    <li>📧 contact@duofilms.com</li>
+                    <li>📱 (+244) 911 10 09 80 13</li>
+                    <li>📸 Instagram: @duofilms</li>
+                    <li>🐦 Twitter: @duofilms</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-2xl font-bold">Ligue para nós</h3>
+                <p>Contacte a nossa equipa de segunda a sexta, das 8h às 17h.</p>
+                <p>📞 (+244) 922 23 24 25</p>
+            </div>
+        </div>
+
+        <!-- Formulário de Contacto -->
+        <div class="bg-white text-black p-8 rounded-lg shadow-lg">
+            <h3 class="text-2xl font-bold mb-6">Entre em contacto</h3>
+            {{ form_start(form) }}
+            <div class="space-y-4">
+                {{ form_row(form.fullName, {'attr': {'class': 'w-full p-2 border border-gray-300 rounded-lg'}}) }}
+                {{ form_row(form.email, {'attr': {'class': 'w-full p-2 border border-gray-300 rounded-lg'}}) }}
+                {{ form_row(form.subject, {'attr': {'class': 'w-full p-2 border border-gray-300 rounded-lg'}}) }}
+                {{ form_row(form.content, {'attr': {'class': 'w-full p-2 border border-gray-300 rounded-lg'}}) }}
+            </div>
+            <button type="submit" class="mt-6 bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800">
+                Enviar
+            </button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</section>

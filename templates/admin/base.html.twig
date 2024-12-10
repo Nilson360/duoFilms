@@ -10,21 +10,14 @@
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
-        <style>
-            html{
-                scroll-behavior: smooth;
-            }
-        </style>
+
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
     <body class="bg-[#121212]">
-    {% include '__partials/navbar.html.twig' %}
         {% block body %}{% endblock %}
-    {% include '__partials/footer.html.twig' %}
-
     </body>
 
 </html>
