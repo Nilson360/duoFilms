@@ -3,21 +3,21 @@
 {% block title %}Nosso Portfólio{% endblock %}
 
 {% block body %}
-    <section class="py-16 bg-[#121212] mt-12">
+    <div class="py-16 bg-[#121212] mt-12 px-4 sm:px-8 lg:px-16">
         <div class="container mx-auto text-center">
-            <h1 class="text-4xl font-bold mb-8 text-white">O nosso Portfólio</h1>
+            <h1 class="text-3xl md:text-4xl lg:text-4xl font-bold mb-8 text-white">O nosso Portfólio</h1>
             <p class="text-lg text-white mb-12">
                 Explore os projetos que já realizámos com sucesso. Estamos orgulhosos de cada trabalho que entrega valor e satisfação aos nossos clientes.
             </p>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                 <!-- Projetos -->
                 {% for i in 1..6 %}
-                    <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                    <div class="bg-black border border-white shadow-md rounded-lg overflow-hidden">
                         <img class="w-full h-49 object-cover" src="{{ asset('images/img_5.png') }}" alt="Projeto {{ i }}">
                         <div class="p-4">
-                            <h3 class="font-bold text-xl mb-2">Projeto {{ i }}</h3>
-                            <p class="text-black mb-4">Descrição breve do projeto realizado.</p>
-                            <a href="#" class="bg-black hover:bg-black text-white font-medium text-sm px-4 py-2 rounded-lg">
+                            <h3 class="text-white font-bold text-xl mb-2">Projeto {{ i }}</h3>
+                            <p class="text-white mb-4">Descrição breve do projeto realizado.</p>
+                            <a href="#" class="bg-white hover:bg-black text-black font-medium text-sm px-4 py-2 rounded-lg">
                                 Descobrir as Fotos
                             </a>
                         </div>
@@ -25,5 +25,5 @@
                 {% endfor %}
             </div>
         </div>
-    </section>
+    </div>
 {% endblock %}
