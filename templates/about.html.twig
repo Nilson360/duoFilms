@@ -1,0 +1,263 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sobre Nós - Duo Films{% endblock %}
+
+{% block body %}
+    <!-- Header da página -->
+    <header class="relative bg-[#121212] text-white py-28 mt-16 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="bg-gradient-to-r from-black to-[#121212] opacity-70 absolute inset-0"></div>
+            <img src="{{ asset('images/img_5.png') }}" alt="Nossa equipe" class="w-full h-full object-cover opacity-50">
+        </div>
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Sobre Nós</h1>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                Conheça a equipe por trás da Duo Films e nossa paixão por contar histórias através de imagens.
+            </p>
+        </div>
+    </header>
+
+<!-- Nossa História -->
+    <section class="py-16 bg-[#121212] text-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6">Nossa História</h2>
+                    <div class="space-y-4">
+                        <p>
+                            Fundada em 2019, a Duo Films nasceu da paixão de dois amigos fotógrafos que compartilhavam a
+                            mesma visão: capturar momentos únicos com um olhar artístico e autêntico.
+                        </p>
+                        <p>
+                            O que começou como um pequeno estúdio em Lisboa rapidamente cresceu para se tornar uma
+                            referência em fotografia de casamentos, eventos e produções comerciais em Portugal.
+                        </p>
+                        <p>
+                            Ao longo dos anos, expandimos nossa equipe com profissionais talentosos e apaixonados, cada
+                            um trazendo sua própria perspectiva criativa para nossos projetos.
+                        </p>
+                        <p>
+                            Hoje, a Duo Films é reconhecida pela sua abordagem única, combinando técnicas tradicionais
+                            com inovações contemporâneas para criar imagens que contam histórias e evocam emoções.
+                        </p>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="{{ asset('images/img_5.png') }}" alt="Nossa jornada"
+                         class="rounded-lg shadow-lg w-full h-auto">
+                    <div class="absolute -bottom-5 -left-5 w-24 h-24 bg-white flex items-center justify-center rounded-lg shadow-lg">
+                        <div class="text-center">
+                            <div class="text-black text-2xl font-bold">5+</div>
+                            <div class="text-black text-xs">Anos de história</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Nossa Missão e Valores -->
+    <section class="py-16 bg-black text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Missão e Valores</h2>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+                    Conheça nossa abordagem única que assegura resultados excepcionais em cada projeto.
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="space-y-8">
+                    <!-- Etapa 1 -->
+                    <div class="relative flex items-start">
+                        <div class="flex-shrink-0 mr-8">
+                            <div class="w-12 h-12 bg-white text-black rounded-full flex items-center justify-center font-bold text-xl">
+                                1
+                            </div>
+                            <div class="absolute h-full w-0.5 bg-gray-800 left-6 top-12 z-0"></div>
+                        </div>
+                        <div class="bg-[#121212] p-6 rounded-lg border border-gray-800 w-full">
+                            <h3 class="text-xl font-bold mb-3">Consulta Inicial</h3>
+                            <p class="text-gray-300">
+                                Começamos com uma reunião personalizada para entender suas necessidades, visão e
+                                expectativas. Este primeiro contato é fundamental para alinharmos objetivos e
+                                estabelecermos uma conexão.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Etapa 2 -->
+                    <div class="relative flex items-start">
+                        <div class="flex-shrink-0 mr-8">
+                            <div class="w-12 h-12 bg-white text-black rounded-full flex items-center justify-center font-bold text-xl">
+                                2
+                            </div>
+                            <div class="absolute h-full w-0.5 bg-gray-800 left-6 top-12 z-0"></div>
+                        </div>
+                        <div class="bg-[#121212] p-6 rounded-lg border border-gray-800 w-full">
+                            <h3 class="text-xl font-bold mb-3">Planejamento Detalhado</h3>
+                            <p class="text-gray-300">
+                                Desenvolvemos um plano personalizado, definindo aspectos técnicos, locações, cronograma
+                                e elementos visuais. Cada detalhe é cuidadosamente considerado para garantir que sua
+                                visão seja realizada.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Etapa 3 -->
+                    <div class="relative flex items-start">
+                        <div class="flex-shrink-0 mr-8">
+                            <div class="w-12 h-12 bg-white text-black rounded-full flex items-center justify-center font-bold text-xl">
+                                3
+                            </div>
+                            <div class="absolute h-full w-0.5 bg-gray-800 left-6 top-12 z-0"></div>
+                        </div>
+                        <div class="bg-[#121212] p-6 rounded-lg border border-gray-800 w-full">
+                            <h3 class="text-xl font-bold mb-3">Produção Profissional</h3>
+                            <p class="text-gray-300">
+                                No dia do evento ou sessão, nossa equipe trabalha com profissionalismo e discrição,
+                                capturando momentos autênticos e criando imagens que contam sua história de forma única.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Etapa 4 -->
+                    <div class="relative flex items-start">
+                        <div class="flex-shrink-0 mr-8">
+                            <div class="w-12 h-12 bg-white text-black rounded-full flex items-center justify-center font-bold text-xl">
+                                4
+                            </div>
+                            <div class="absolute h-full w-0.5 bg-gray-800 left-6 top-12 z-0"></div>
+                        </div>
+                        <div class="bg-[#121212] p-6 rounded-lg border border-gray-800 w-full">
+                            <h3 class="text-xl font-bold mb-3">Edição e Pós-Produção</h3>
+                            <p class="text-gray-300">
+                                Nossa equipe de edição trabalha meticulosamente em cada imagem, aplicando correções de
+                                cor, retoque e aprimoramentos para criar um resultado final que exceda suas
+                                expectativas.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Etapa 5 -->
+                    <div class="relative flex items-start">
+                        <div class="flex-shrink-0 mr-8">
+                            <div class="w-12 h-12 bg-white text-black rounded-full flex items-center justify-center font-bold text-xl">
+                                5
+                            </div>
+                        </div>
+                        <div class="bg-[#121212] p-6 rounded-lg border border-gray-800 w-full">
+                            <h3 class="text-xl font-bold mb-3">Entrega e Acompanhamento</h3>
+                            <p class="text-gray-300">
+                                Entregamos o produto final em formatos otimizados para uso digital e impressão. Mantemos
+                                um relacionamento contínuo, garantindo sua satisfação e estando disponíveis para
+                                projetos futuros.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Reconhecimentos e Parceiros -->
+    <section class="py-16 bg-[#121212] text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Reconhecimentos e Parceiros</h2>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+                    Orgulhosos das colaborações e reconhecimentos que recebemos ao longo dos anos.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-16">
+                <!-- Logos de parceiros/clientes -->
+                <div class="flex items-center justify-center opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300">
+                    <img src="{{ asset('images/trust/ende.png') }}" alt="Parceiro 1" class="h-12">
+                </div>
+                <div class="flex items-center justify-center opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300">
+                    <img src="{{ asset('images/trust/wami.png') }}" alt="Parceiro 2" class="h-12">
+                </div>
+                <div class="flex items-center justify-center opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300">
+                    <img src="{{ asset('images/trust/global_service.png') }}" alt="Parceiro 3" class="h-12">
+                </div>
+                <div class="flex items-center justify-center opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300">
+                    <img src="{{ asset('images/trust/fozmolas.png') }}" alt="Parceiro 4" class="h-12">
+                </div>
+                <div class="flex items-center justify-center opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300">
+                    <img src="{{ asset('images/trust/ende.png') }}" alt="Parceiro 5" class="h-12">
+                </div>
+                <div class="flex items-center justify-center opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300">
+                    <img src="{{ asset('images/trust/wami.png') }}" alt="Parceiro 6" class="h-12">
+                </div>
+            </div>
+
+            <!-- Reconhecimentos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-black p-6 rounded-lg border border-gray-800">
+                    <div class="flex items-center mb-4">
+                        <svg class="w-8 h-8 text-yellow-400 mr-3" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <h3 class="text-lg font-bold">Prêmio de Excelência</h3>
+                    </div>
+                    <p class="text-gray-300">Associação de Fotógrafos Profissionais de Portugal, 2023</p>
+                </div>
+
+                <div class="bg-black p-6 rounded-lg border border-gray-800">
+                    <div class="flex items-center mb-4">
+                        <svg class="w-8 h-8 text-yellow-400 mr-3" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <h3 class="text-lg font-bold">Melhor Videografia</h3>
+                    </div>
+                    <p class="text-gray-300">Festival Internacional de Cinema Documental, 2022</p>
+                </div>
+
+                <div class="bg-black p-6 rounded-lg border border-gray-800">
+                    <div class="flex items-center mb-4">
+                        <svg class="w-8 h-8 text-yellow-400 mr-3" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <h3 class="text-lg font-bold">Top 10 Estúdios</h3>
+                    </div>
+                    <p class="text-gray-300">Revista Fotografia Profissional, 2021-2023</p>
+                </div>
+
+                <div class="bg-black p-6 rounded-lg border border-gray-800">
+                    <div class="flex items-center mb-4">
+                        <svg class="w-8 h-8 text-yellow-400 mr-3" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <h3 class="text-lg font-bold">Certificação de Excelência</h3>
+                    </div>
+                    <p class="text-gray-300">Associação Europeia de Fotografia de Eventos, 2022</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Chamada para ação -->
+    <section class="py-20 bg-black text-white text-center">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Vamos criar algo incrível juntos</h2>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
+                Estamos prontos para transformar sua visão em imagens que contam histórias e despertam emoções.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="{{ path('app_contact') }}"
+                   class="bg-white text-black px-8 py-3 rounded-lg hover:bg-gray-200 transition-colors font-medium">
+                    Entrar em Contato
+                </a>
+                <a href="{{ path('app_portfolio') }}"
+                   class="bg-transparent border border-white text-white px-8 py-3 rounded-lg hover:bg-white hover:text-black transition-colors font-medium">
+                    Ver Portfólio
+                </a>
+            </div>
+        </div>
+    </section>
+{% endblock %}

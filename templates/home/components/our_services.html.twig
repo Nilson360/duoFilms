@@ -1,74 +1,162 @@
 <section class="bg-[#121212] text-white py-16 mt-0 md:mt-6 lg:mt-6" id="our_services">
     <div class="max-w-screen-xl mx-auto px-4">
-        <!-- Titre principal -->
+        <!-- Título principal -->
         <div class="text-center mb-12">
             <h2 class="text-3xl md:text-4xl lg:text-4xl font-bold">Nossos Serviços</h2>
-            <p class="text-lg mt-4">
+            <p class="text-lg mt-4 max-w-3xl mx-auto">
                 Duo Films é a sua solução ideal para fotografia profissional, capturando a essência dos seus eventos mais importantes e momentos de marca.
             </p>
         </div>
-        <!-- Contenu des services -->
+
+        <!-- Conteúdo dos serviços -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Service 1 -->
-            <div class="bg-[#121212] text-white border border-white rounded-lg shadow-md overflow-hidden">
-                <img src="{{ asset('images/img_5.png') }}" alt="Casamento" class="w-full h-64 object-cover">
+            <!-- Serviço 1 -->
+            <div class="bg-[#121212] text-white border border-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+                <div class="relative">
+                    <img src="{{ asset('images/img_5.png') }}" alt="Casamento" class="w-full h-64 object-cover">
+                    <div class="absolute top-0 right-0 bg-black bg-opacity-70 px-3 py-1 m-2 rounded">
+                        <span class="text-sm font-medium">Serviço Premium</span>
+                    </div>
+                </div>
                 <div class="p-6">
                     <h3 class="text-xl md:text-2xl lg:text-2xl font-bold mb-4">Fotografia de Casamentos</h3>
                     <p class="text-lg mb-6">
                         Capture os momentos mais especiais do seu casamento com um toque artístico e profissional.
                     </p>
-                    <div class="flex space-x-4">
-                        <a href="#"
-                           class="inline-block text-white border border-white hover:bg-black hover:text-white font-medium rounded-lg px-6 py-3">
+                    <ul class="mb-6 space-y-2">
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Equipe de fotógrafos experientes
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Álbum digital e impresso
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Edição profissional
+                        </li>
+                    </ul>
+                    <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                        <a href="{{ path('app_contact') }}"
+                           class="inline-block text-center text-white border border-white hover:bg-black hover:text-white font-medium rounded-lg px-6 py-3 transition-colors">
                             Solicitar Serviço
                         </a>
-                        <a href="#"
-                           class="inline-block text-white border border-white hover:bg-black hover:text-white font-medium rounded-lg px-6 py-3">
-                            Ver Trabalhos Antigos
+                        <a href="{{ path('app_portfolio') }}"
+                           class="inline-block text-center text-white border border-white hover:bg-black hover:text-white font-medium rounded-lg px-6 py-3 transition-colors">
+                            Ver Trabalhos
                         </a>
                     </div>
                 </div>
             </div>
-            <!-- Service 2 -->
-            <div class="bg-[#121212] text-white border border-white rounded-lg shadow-md overflow-hidden">
-                <img src="{{ asset('images/img_5.png') }}" alt="Eventos" class="w-full h-64 object-cover">
+
+            <!-- Serviço 2 -->
+            <div class="bg-[#121212] text-white border border-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+                <div class="relative">
+                    <img src="{{ asset('images/img_5.png') }}" alt="Eventos" class="w-full h-64 object-cover">
+                    <div class="absolute top-0 right-0 bg-black bg-opacity-70 px-3 py-1 m-2 rounded">
+                        <span class="text-sm font-medium">Mais Popular</span>
+                    </div>
+                </div>
                 <div class="p-6">
                     <h3 class="text-xl md:text-2xl lg:text-2xl font-bold mb-4">Fotografia de Eventos</h3>
                     <p class="text-lg mb-6">
                         Garanta que todos os detalhes do seu evento sejam eternizados de forma profissional.
                     </p>
-                    <div class="flex space-x-4">
-                        <a href="#"
-                           class="inline-block text-white border border-white hover:bg-black hover:text-white font-medium rounded-lg px-6 py-3">
+                    <ul class="mb-6 space-y-2">
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Cobertura completa do evento
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Entrega rápida das fotos
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Equipamentos de última geração
+                        </li>
+                    </ul>
+                    <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                        <a href="{{ path('app_contact') }}"
+                           class="inline-block text-center text-white border border-white hover:bg-black hover:text-white font-medium rounded-lg px-6 py-3 transition-colors">
                             Solicitar Serviço
                         </a>
-                        <a href="#"
-                           class="inline-block text-white border border-white hover:bg-black hover:text-white font-medium rounded-lg px-6 py-3">
-                            Ver Trabalhos Antigos
+                        <a href="{{ path('app_portfolio') }}"
+                           class="inline-block text-center text-white border border-white hover:bg-black hover:text-white font-medium rounded-lg px-6 py-3 transition-colors">
+                            Ver Trabalhos
                         </a>
                     </div>
                 </div>
             </div>
-            <!-- Service 3 -->
-            <div class="bg-[#121212] text-white border border-white rounded-lg shadow-md overflow-hidden">
-                <img src="{{ asset('images/img_5.png') }}" alt="Corporativo" class="w-full h-64 object-cover">
+
+            <!-- Serviço 3 -->
+            <div class="bg-[#121212] text-white border border-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+                <div class="relative">
+                    <img src="{{ asset('images/img_5.png') }}" alt="Corporativo" class="w-full h-64 object-cover">
+                    <div class="absolute top-0 right-0 bg-black bg-opacity-70 px-3 py-1 m-2 rounded">
+                        <span class="text-sm font-medium">Para Empresas</span>
+                    </div>
+                </div>
                 <div class="p-6">
-                    <h3 class="text-xl md:text-2xl lg:text-2xl font-bold mb-4">Criação de Conteúdo Corporativo</h3>
+                    <h3 class="text-xl md:text-2xl lg:text-2xl font-bold mb-4">Conteúdo Corporativo</h3>
                     <p class="text-lg mb-6">
                         Ajude sua empresa a se destacar com fotos e vídeos criativos que comunicam sua mensagem.
                     </p>
-                    <div class="flex space-x-4">
-                        <a href="#"
-                           class="inline-block text-white border border-white hover:bg-black hover:text-white font-medium rounded-lg px-6 py-3">
+                    <ul class="mb-6 space-y-2">
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Fotografia corporativa profissional
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Vídeos promocionais
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Direitos de uso comercial
+                        </li>
+                    </ul>
+                    <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                        <a href="{{ path('app_contact') }}"
+                           class="inline-block text-center text-white border border-white hover:bg-black hover:text-white font-medium rounded-lg px-6 py-3 transition-colors">
                             Solicitar Serviço
                         </a>
-                        <a href="#"
-                           class="inline-block text-white border border-white hover:bg-black hover:text-white font-medium rounded-lg px-6 py-3">
-                            Ver Trabalhos Antigos
+                        <a href="{{ path('app_portfolio') }}"
+                           class="inline-block text-center text-white border border-white hover:bg-black hover:text-white font-medium rounded-lg px-6 py-3 transition-colors">
+                            Ver Trabalhos
                         </a>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Chamada para ação -->
+        <div class="text-center mt-16">
+            <p class="text-lg mb-6 max-w-2xl mx-auto">
+                Não encontrou o serviço que procura? Entre em contato conosco para discutir suas necessidades específicas.
+            </p>
+            <a href="{{ path('app_contact') }}" class="inline-block text-white bg-black border border-white hover:bg-gray-800 font-medium rounded-lg px-8 py-4 text-lg transition-colors">
+                Solicitar Orçamento Personalizado
+            </a>
         </div>
     </div>
 </section>

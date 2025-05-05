@@ -1,39 +1,328 @@
-<section class="bg-[#121212] text-white py-16" id="contact_us">
-    <div class="max-w-screen-xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Informação de Contacto -->
-        <div>
-            <h2 class="text-3xl md:text-4xl font-bold underline mb-6">Contacte-nos</h2>
-            <div class="mb-8">
-                <h3 class="text-2xl font-bold">Fale connosco</h3>
-                <p>Converse com a nossa equipa através do chat ao vivo</p>
-                <ul class="space-y-4 mt-4">
-                    <li>📧 contact@duofilms.com</li>
-                    <li>📱 (+244) 911 10 09 80 13</li>
-                    <li>📸 Instagram: @duofilms</li>
-                    <li>🐦 Twitter: @duofilms</li>
-                </ul>
-            </div>
-            <div>
-                <h3 class="text-2xl font-bold">Ligue para nós</h3>
-                <p>Contacte a nossa equipa de segunda a sexta, das 8h às 17h.</p>
-                <p>📞 (+244) 922 23 24 25</p>
-            </div>
-        </div>
+{% extends 'base.html.twig' %}
 
-        <!-- Formulário de Contacto -->
-        <div class="bg-white text-black p-8 rounded-lg shadow-lg">
-            <h3 class="text-2xl font-bold mb-6">Entre em contacto</h3>
-            {{ form_start(form) }}
-            <div class="space-y-4">
-                {{ form_row(form.fullName, {'attr': {'class': 'w-full p-2 border border-gray-300 rounded-lg'}}) }}
-                {{ form_row(form.email, {'attr': {'class': 'w-full p-2 border border-gray-300 rounded-lg'}}) }}
-                {{ form_row(form.subject, {'attr': {'class': 'w-full p-2 border border-gray-300 rounded-lg'}}) }}
-                {{ form_row(form.content, {'attr': {'class': 'w-full p-2 border border-gray-300 rounded-lg'}}) }}
+{% block title %}Contato - Duo Films{% endblock %}
+
+{% block body %}
+    <!-- Header da página com efeito parallax -->
+    <header class="relative bg-[#121212] text-white py-28 mt-16 overflow-hidden">
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Entre em Contato</h1>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto">Transforme seus momentos em memórias eternas. Estamos
+                prontos para capturar a essência do seu próximo projeto.</p>
+        </div>
+    </header>
+
+    <!-- Tabs para navegação de seção -->
+    <div class="bg-black sticky top-16 z-20 shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex overflow-x-auto py-4 space-x-6 scrollbar-hide">
+                <a href="#contact-form"
+                   class="text-white font-medium hover:text-gray-300 whitespace-nowrap px-2 py-1 border-b-2 border-white">Formulário
+                    de Contato</a>
+                <a href="#faq"
+                   class="text-gray-400 font-medium hover:text-white whitespace-nowrap px-2 py-1 border-b-2 border-transparent hover:border-white">Perguntas
+                    Frequentes</a>
+                <a href="#location"
+                   class="text-gray-400 font-medium hover:text-white whitespace-nowrap px-2 py-1 border-b-2 border-transparent hover:border-white">Localização</a>
+                <a href="#social"
+                   class="text-gray-400 font-medium hover:text-white whitespace-nowrap px-2 py-1 border-b-2 border-transparent hover:border-white">Redes
+                    Sociais</a>
             </div>
-            <button type="submit" class="mt-6 bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800">
-                Enviar
-            </button>
-            {{ form_end(form) }}
         </div>
     </div>
-</section>
+
+    <!-- Seção de contato principal -->
+    <section id="contact-form" class="py-16 bg-[#121212] text-white">
+        <div class="container mx-auto px-4">
+            {# Mensagens Flash #}
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="mb-8 p-4 rounded-lg {{ label == 'success' ? 'bg-green-800 text-white' : 'bg-red-800 text-white' }} flex items-center">
+                        {% if label == 'success' %}
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        {% else %}
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        {% endif %}
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Formulário de contato com Symfony Form -->
+                <div class="bg-[#121212] p-8 rounded-lg shadow-lg border border-gray-800">
+                    <h2 class="text-2xl font-bold mb-6 pb-4 border-b border-gray-800">Envie sua mensagem</h2>
+                    {{ form_start(form, {'attr': {'id': 'contactForm', 'class': 'space-y-6'}}) }}
+
+                    <div class="mb-6">
+                        {{ form_label(form.fullName, 'Nome Completo', {'label_attr': {'class': 'block text-sm font-medium text-white mb-2'}}) }}
+                        {{ form_widget(form.fullName, {'attr': {'class': 'w-full p-2 border border-gray-300 rounded-lg bg-white text-black', 'placeholder': 'Seu nome completo'}}) }}
+                        {{ form_errors(form.fullName, {'attr': {'class': 'text-red-400 text-sm mt-1'}}) }}
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            {{ form_label(form.email, 'Email', {'label_attr': {'class': 'block text-sm font-medium text-white mb-2'}}) }}
+                            {{ form_widget(form.email, {'attr': {'class': 'w-full p-2 border border-gray-300 rounded-lg bg-white text-black', 'placeholder': 'seu@email.com'}}) }}
+                            {{ form_errors(form.email, {'attr': {'class': 'text-red-400 text-sm mt-1'}}) }}
+                        </div>
+                        <div>
+                            {{ form_label(form.phoneNumber, 'Telefone', {'label_attr': {'class': 'block text-sm font-medium text-white mb-2'}}) }}
+                            {{ form_widget(form.phoneNumber, {'attr': {'class': 'w-full p-2 border border-gray-300 rounded-lg bg-white text-black', 'placeholder': '+351 XXX XXX XXX'}}) }}
+                            {{ form_errors(form.phoneNumber, {'attr': {'class': 'text-red-400 text-sm mt-1'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        {{ form_label(form.subject, 'Assunto', {'label_attr': {'class': 'block text-sm font-medium text-white mb-2'}}) }}
+                        {{ form_widget(form.subject, {'attr': {'class': 'w-full p-2 border border-gray-300 rounded-lg bg-white text-black', 'placeholder': 'Motivo do contato'}}) }}
+                        {{ form_errors(form.subject, {'attr': {'class': 'text-red-400 text-sm mt-1'}}) }}
+                    </div>
+
+                    <div class="mb-6">
+                        {{ form_label(form.content, 'Sua Mensagem', {'label_attr': {'class': 'block text-sm font-medium text-white mb-2'}}) }}
+                        {{ form_widget(form.content, {'attr': {'class': 'w-full p-2 border border-gray-300 rounded-lg bg-white text-black resize-none', 'rows': '4', 'placeholder': 'Descreva seu projeto ou dúvida...'}}) }}
+                        {{ form_errors(form.content, {'attr': {'class': 'text-red-400 text-sm mt-1'}}) }}
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="flex items-start">
+                            {{ form_widget(form.privacy, {'attr': {'class': 'form-checkbox h-5 w-5 mt-1'}}) }}
+                            <span class="ml-2 text-sm text-white">Li e concordo com a <a
+                                        href="{{ path('app_footer_content', {slug:'privacy'}) }}"
+                                        class="text-white underline hover:text-gray-300">Política de Privacidade</a> da Duo Films, autorizando o tratamento dos meus dados para fins de contato.</span>
+                        </label>
+                        {{ form_errors(form.privacy, {'attr': {'class': 'text-red-400 text-sm mt-1'}}) }}
+                    </div>
+
+                    <button type="submit"
+                            class="w-full mt-6 bg-black text-white px-4 py-3 rounded-lg hover:bg-gray-800 border border-white transition-all duration-300 flex items-center justify-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                        </svg>
+                        Enviar Mensagem
+                    </button>
+
+                    {{ form_end(form) }}
+                </div>
+
+                <!-- Informações de contato -->
+                <div class="flex flex-col justify-between space-y-8">
+                    <div class="bg-[#121212] p-8 rounded-lg shadow-lg border border-gray-800">
+                        <h2 class="text-2xl font-bold mb-6 pb-4 border-b border-gray-800">Informações de Contato</h2>
+
+                        <div class="space-y-6">
+                            <div class="flex items-start" id="location">
+                                <div class="flex-shrink-0 bg-black p-3 rounded-lg mr-4 border border-white">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor"
+                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium mb-1">Localização</h4>
+                                    <p class="text-gray-300">Av. da Liberdade, 123<br>Lisboa, Portugal</p>
+                                    <a href="https://maps.google.com/?q=Av. da Liberdade, 123, Lisboa, Portugal"
+                                       target="_blank"
+                                       class="text-sm text-white underline hover:text-gray-300 mt-2 inline-block">Ver no
+                                        Google Maps</a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-black p-3 rounded-lg mr-4 border border-white">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor"
+                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium mb-1">Email</h4>
+                                    <a href="mailto:contato@duofilms.com"
+                                       class="text-gray-300 hover:text-white transition-colors">contato@duofilms.com</a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-black p-3 rounded-lg mr-4 border border-white">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor"
+                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium mb-1">Telefone</h4>
+                                    <a href="tel:+351912345678"
+                                       class="text-gray-300 hover:text-white transition-colors">+351 912 345 678</a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-black p-3 rounded-lg mr-4 border border-white">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor"
+                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium mb-1">Horário de Atendimento</h4>
+                                    <p class="text-gray-300">Segunda a Sexta: 9h às 18h<br>Sábado: 10h às 14h</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Redes sociais -->
+                    <div class="bg-[#121212] p-8 rounded-lg shadow-lg border border-gray-800" id="social">
+                        <h2 class="text-2xl font-bold mb-6 pb-4 border-b border-gray-800">Redes Sociais</h2>
+                        <p class="text-gray-300 mb-6">Acompanhe nosso trabalho e as últimas novidades nas redes
+                            sociais.</p>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <a href="https://instagram.com/" target="_blank"
+                               class="bg-black p-5 rounded-lg hover:bg-gray-800 transition-all duration-300 border border-white flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 text-white mb-2" fill="currentColor" viewBox="0 0 24 24"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-sm font-medium">Instagram</span>
+                            </a>
+                            <a href="https://facebook.com/" target="_blank"
+                               class="bg-black p-5 rounded-lg hover:bg-gray-800 transition-all duration-300 border border-white flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 text-white mb-2" fill="currentColor" viewBox="0 0 24 24"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path>
+                                </svg>
+                                <span class="text-sm font-medium">Facebook</span>
+                            </a>
+                            <a href="https://youtube.com/" target="_blank"
+                               class="bg-black p-5 rounded-lg hover:bg-gray-800 transition-all duration-300 border border-white flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 text-white mb-2" fill="currentColor" viewBox="0 0 24 24"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0C.488 3.45.029 5.804 0 12c.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0C23.512 20.55 23.971 18.196 24 12c-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 3.993L9 16z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-sm font-medium">YouTube</span>
+                            </a>
+                            <a href="https://tiktok.com/" target="_blank"
+                               class="bg-black p-5 rounded-lg hover:bg-gray-800 transition-all duration-300 border border-white flex flex-col items-center justify-center text-center">
+                                <svg class="w-8 h-8 text-white mb-2" fill="currentColor" viewBox="0 0 24 24"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+                                </svg>
+                                <span class="text-sm font-medium">TikTok</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mapa e horários em tela cheia -->
+    <section class="py-16 bg-black text-white" id="map-section">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2">
+                    <h2 class="text-2xl font-bold mb-6">Onde Estamos</h2>
+                    <div class="rounded-lg overflow-hidden shadow-lg h-96">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3113.1869607123456!2d-9.1453456847751!3d38.7179445717576!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd19330dd0b4b747%3A0xb8b8f0d3a5b56ce0!2sAv.%20da%20Liberdade%2C%20Lisboa%2C%20Portugal!5e0!3m2!1spt-PT!2spt!4v1588560008167!5m2!1spt-PT!2spt"
+                                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+                <div class="bg-[#121212] p-8 rounded-lg shadow-lg border border-gray-800">
+                    <h2 class="text-2xl font-bold mb-6">Horário de Funcionamento</h2>
+                    <div class="space-y-4">
+                        <div class="flex justify-between">
+                            <span class="font-medium">Segunda-feira</span>
+                            <span>9:00 - 18:00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="font-medium">Terça-feira</span>
+                            <span>9:00 - 18:00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="font-medium">Quarta-feira</span>
+                            <span>9:00 - 18:00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="font-medium">Quinta-feira</span>
+                            <span>9:00 - 18:00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="font-medium">Sexta-feira</span>
+                            <span>9:00 - 18:00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="font-medium">Sábado</span>
+                            <span>10:00 - 14:00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="font-medium">Domingo</span>
+                            <span class="text-gray-500">Fechado</span>
+                        </div>
+                    </div>
+                    <div class="mt-8 pt-6 border-t border-gray-800">
+                        <h3 class="text-lg font-medium mb-4">Observações</h3>
+                        <ul class="space-y-2 text-gray-300">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor"
+                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span>Atendimentos fora do horário comercial apenas com agendamento prévio.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor"
+                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span>Em caso de sessões fotográficas nos finais de semana, entre em contato conosco para verificar disponibilidade.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% include 'home/components/faq.html.twig' %}
+    <!-- Chamada para ação final -->
+    <section class="py-20 bg-[#121212] bg-opacity-90 text-white text-center relative">
+        <div class="container mx-auto px-4 relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Pronto para capturar seus momentos?</h2>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-8">Cada momento é único e merece ser eternizado com
+                qualidade e criatividade.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#contact-form"
+                   class="bg-black text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors border border-white text-lg">
+                    Fale Conosco Agora
+                </a>
+                <a href="{{ path('app_portfolio') }}"
+                   class="bg-transparent text-white px-8 py-3 rounded-lg hover:bg-white hover:text-black transition-colors border border-white text-lg">
+                    Ver Portfólio
+                </a>
+            </div>
+        </div>
+    </section>
+{% endblock %}
