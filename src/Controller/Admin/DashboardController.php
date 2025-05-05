@@ -1,53 +1,75 @@
 <?php
-
+// src/Controller/Admin/DashboardController.php
 namespace App\Controller\Admin;
 
 use App\Entity\Contact;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
-use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
-use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
+use App\Entity\Photo;
+use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use App\Entity\User;
-use App\Entity\Photo;
 
-class DashboardController extends AbstractDashboardController
+#[Route('/admin')]
+class DashboardController extends AbstractController
 {
-    #[Route('/admin', name: 'admin')]
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+    #[Route('/', name: 'admin_dashboard')]
     public function index(): Response
     {
-        return parent::index();
+        $photoCount = $this->entityManager->getRepository(Photo::class)->count([]);
+        $messageCount = $this->entityManager->getRepository(Contact::class)->count([]);
+        $userCount = $this->entityManager->getRepository(User::class)->count([]);
 
-        // Option 1. You can make your dashboard redirect to some common page of your backend
-        //
-//         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-//        return $this->redirect($adminUrlGenerator->setController(PhotoCrudController::class)->generateUrl());
-
-        // Option 2. You can make your dashboard redirect to different pages depending on the user
-        //OneOfYourCrudController
-        // if ('jane' === $this->getUser()->getUsername()) {
-        //     return $this->redirect('...');
-        // }
-
-        // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
-        // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
-        //
-        //return $this->render('some/path/my-dashboard.html.twig');
+        return $this->render('admin/dashboard/index.html.twig', [
+            'photoCount' => $photoCount,
+            'messageCount' => $messageCount,
+            'userCount' => $userCount,
+        ]);
     }
-
-    public function configureDashboard(): Dashboard
+    #[Route('/users', name: 'admin_messages')]
+    public function messages(): Response
     {
-        return Dashboard::new()
-            ->setTitle('DuoFilms');
+        $photoCount = $this->entityManager->getRepository(Photo::class)->count([]);
+        $messageCount = $this->entityManager->getRepository(Contact::class)->count([]);
+        $userCount = $this->entityManager->getRepository(User::class)->count([]);
+
+        return $this->render('admin/dashboard/index.html.twig', [
+            'photoCount' => $photoCount,
+            'messageCount' => $messageCount,
+            'userCount' => $userCount,
+        ]);
     }
-
-    public function configureMenuItems(): iterable
+    #[Route('/users', name: 'admin_users')]
+    public function users(): Response
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::section('Gestion');
-        yield MenuItem::linkToCrud('Photos', 'fa fa-image', Photo::class);
-        yield MenuItem::linkToCrud('Messages', 'fa fa-envelope', Contact::class);
-        yield MenuItem::linkToCrud('Utilisateurs', 'fa fa-users', User::class);
+        $photoCount = $this->entityManager->getRepository(Photo::class)->count([]);
+        $messageCount = $this->entityManager->getRepository(Contact::class)->count([]);
+        $userCount = $this->entityManager->getRepository(User::class)->count([]);
+
+        return $this->render('admin/dashboard/index.html.twig', [
+            'photoCount' => $photoCount,
+            'messageCount' => $messageCount,
+            'userCount' => $userCount,
+        ]);
+    }
+    #[Route('/logout', name: 'app_logout')]
+    public function logout(): Response
+    {
+        $photoCount = $this->entityManager->getRepository(Photo::class)->count([]);
+        $messageCount = $this->entityManager->getRepository(Contact::class)->count([]);
+        $userCount = $this->entityManager->getRepository(User::class)->count([]);
+
+        return $this->render('admin/dashboard/index.html.twig', [
+            'photoCount' => $photoCount,
+            'messageCount' => $messageCount,
+            'userCount' => $userCount,
+        ]);
     }
 }

@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Personalizações para o EasyAdmin */
+.ea-sidebar {
+    @apply bg-gray-800;
+}
+
+.ea-sidebar .menu {
+    @apply text-gray-300;
+}
+
+.ea-sidebar .menu-item a {
+    @apply hover:bg-gray-700 transition;
+}

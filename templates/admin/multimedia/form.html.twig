@@ -1,0 +1,51 @@
+{# templates/admin/multimedia/form.html.twig #}
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}{{ photo.id ? 'Editar' : 'Adicionar' }} Fotografia | DuoFilms{% endblock %}
+{% block page_title %}{{ photo.id ? 'Editar' : 'Adicionar' }} Fotografia{% endblock %}
+
+{% block content %}
+    <div class="bg-gray-800 rounded-lg shadow-lg p-6">
+        {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label for="{{ form.titlte.vars.id }}" class="block text-sm font-medium mb-2">Título</label>
+                {{ form_widget(form.titlte, {'attr': {'class': 'bg-gray-700 border border-gray-600 text-white rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+                {{ form_errors(form.titlte, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+            </div>
+
+            <div>
+                <label for="{{ form.category.vars.id }}" class="block text-sm font-medium mb-2">Categoria</label>
+                {{ form_widget(form.category, {'attr': {'class': 'bg-gray-700 border border-gray-600 text-white rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+                {{ form_errors(form.category, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+            </div>
+        </div>
+
+        <div>
+            <label for="{{ form.description.vars.id }}" class="block text-sm font-medium mb-2">Descrição</label>
+            {{ form_widget(form.description, {'attr': {'class': 'bg-gray-700 border border-gray-600 text-white rounded-md p-3 w-full h-32 focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+            {{ form_errors(form.description, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+        </div>
+
+        <div>
+            <label for="{{ form.imageFile.vars.id }}" class="block text-sm font-medium mb-2">Imagem</label>
+            {% if photo.path %}
+                <div class="mb-3">
+                    <img src="{{ asset('uploads/photos/' ~ photo.path) }}" alt="{{ photo.titlte }}" class="h-32 rounded-md">
+                </div>
+            {% endif %}
+            {{ form_widget(form.imageFile, {'attr': {'class': 'bg-gray-700 border border-gray-600 text-white rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+            {{ form_errors(form.imageFile, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+        </div>
+
+        <div class="flex justify-end space-x-3">
+            <a href="{{ path('admin_multimedia') }}" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-md transition">
+                Cancelar
+            </a>
+            <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-md transition">
+                {{ photo.id ? 'Guardar alterações' : 'Adicionar fotografia' }}
+            </button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

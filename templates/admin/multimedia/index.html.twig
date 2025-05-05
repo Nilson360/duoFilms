@@ -1,0 +1,94 @@
+{# templates/admin/multimedia/index.html.twig #}
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Multimédia | DuoFilms{% endblock %}
+{% block page_title %}Galeria de Fotografias{% endblock %}
+
+{% block content %}
+    <div class="flex justify-between items-center mb-6">
+        <div class="flex space-x-2">
+            <div class="relative">
+                <input type="text" placeholder="Pesquisar..." class="bg-gray-700 border border-gray-600 rounded-md py-2 px-4 pl-10 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div class="absolute left-3 top-2.5">
+                    <i class="fas fa-search text-gray-400"></i>
+                </div>
+            </div>
+
+            <select class="bg-gray-700 border border-gray-600 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="">Todas categorias</option>
+                <option value="categoria1">Categoria 1</option>
+                <option value="categoria2">Categoria 2</option>
+            </select>
+        </div>
+
+        <a href="{{ path('admin_multimedia_new') }}" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md flex items-center transition">
+            <i class="fas fa-plus mr-2"></i>
+            <span>Adicionar Fotografia</span>
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {% for photo in photos %}
+            <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+                <div class="h-48 overflow-hidden">
+                    <img src="{{ asset('uploads/photos/' ~ photo.path) }}" alt="{{ photo.titlte }}" class="w-full h-full object-cover">
+                </div>
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold">{{ photo.titlte }}</h3>
+                    {% if photo.category %}
+                        <p class="text-gray-400 text-sm">{{ photo.category }}</p>
+                    {% endif %}
+                    <div class="flex justify-end mt-3 space-x-3">
+                        <a href="{{ path('admin_multimedia_show', {id: photo.id}) }}" class="text-blue-400 hover:text-blue-300">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                        <a href="{{ path('admin_multimedia_edit', {id: photo.id}) }}" class="text-yellow-400 hover:text-yellow-300">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="#" class="text-red-400 hover:text-red-300"
+                           onclick="if(confirm('Tem certeza que deseja eliminar esta fotografia?')) { document.getElementById('delete-form-{{ photo.id }}').submit(); } return false;">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                        <form id="delete-form-{{ photo.id }}" action="{{ path('admin_multimedia_delete', {id: photo.id}) }}" method="post" style="display: none;">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ photo.id) }}">
+                            <input type="hidden" name="_method" value="DELETE">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-span-full text-center py-8 bg-gray-800 rounded-lg">
+                <i class="fas fa-photo-video text-5xl text-gray-600 mb-3"></i>
+                <p class="text-gray-400">Nenhuma fotografia encontrada</p>
+                <a href="{{ path('admin_multimedia_new') }}" class="mt-4 inline-block bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md">
+                    Adicionar a primeira fotografia
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if photos|length > 0 %}
+        <div class="mt-8 flex justify-center">
+            <nav class="flex space-x-2">
+                {% if currentPage > 1 %}
+                    <a href="{{ path('admin_multimedia', {page: currentPage - 1}) }}" class="px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded-md">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                {% endif %}
+
+                {% for i in 1..totalPages %}
+                    <a href="{{ path('admin_multimedia', {page: i}) }}"
+                       class="px-3 py-1 {% if i == currentPage %}bg-blue-600{% else %}bg-gray-700 hover:bg-gray-600{% endif %} rounded-md">
+                        {{ i }}
+                    </a>
+                {% endfor %}
+
+                {% if currentPage < totalPages %}
+                    <a href="{{ path('admin_multimedia', {page: currentPage + 1}) }}" class="px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded-md">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                {% endif %}
+            </nav>
+        </div>
+    {% endif %}
+{% endblock %}
