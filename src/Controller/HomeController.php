@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\ContactFormType;
+use App\Service\MailerService;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,11 +17,12 @@ class HomeController extends AbstractController
 {
     private EntityManagerInterface $em;
     private KernelInterface $kernel;
-
-    public function __construct(EntityManagerInterface $em, KernelInterface $kernel)
+    private MailerService $mailerService;
+    public function __construct(EntityManagerInterface $em, KernelInterface $kernel, MailerService $mailerService)
     {
         $this->em = $em;
         $this->kernel = $kernel;
+        $this->mailerService = $mailerService;
     }
 
     #[Route('/', name: 'app_home')]

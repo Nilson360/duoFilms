@@ -19,6 +19,7 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
+    {% set current_route = current_route is defined ? current_route : app.request.attributes.get('_route') %}
     <body class="bg-[#121212]">
     {% include '__partials/navbar.html.twig' %}
         {% block body %}{% endblock %}
