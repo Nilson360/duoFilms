@@ -22,7 +22,9 @@
     {% set current_route = current_route is defined ? current_route : app.request.attributes.get('_route') %}
     <body class="bg-[#121212]">
     {% include '__partials/navbar.html.twig' %}
-        {% block body %}{% endblock %}
+        {% block body %}
+            {% block media_gallery %}{% endblock %}
+        {% endblock %}
     {% include '__partials/footer.html.twig' %}
     </body>
 

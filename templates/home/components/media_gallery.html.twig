@@ -10,15 +10,21 @@
         <!-- Tabs para alternar entre fotos e vídeos -->
         <div class="flex justify-center mb-8">
             <div class="flex space-x-4 border-b border-gray-700">
-                <button class="gallery-tab active px-6 py-3 text-white font-medium border-b-2 border-white transition-colors focus:outline-none" data-tab="photos">
-                    <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                <button class="gallery-tab active px-6 py-3 text-white font-medium border-b-2 border-white transition-colors focus:outline-none"
+                        data-tab="photos">
+                    <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
                     Fotografias
                 </button>
-                <button class="gallery-tab px-6 py-3 text-gray-400 font-medium border-b-2 border-transparent hover:text-white transition-colors focus:outline-none" data-tab="videos">
-                    <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                <button class="gallery-tab px-6 py-3 text-gray-400 font-medium border-b-2 border-transparent hover:text-white transition-colors focus:outline-none"
+                        data-tab="videos">
+                    <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                     </svg>
                     Vídeos
                 </button>
@@ -48,14 +54,16 @@
                 <!-- Grid de Fotos Responsivo -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     <!-- Imagem 1 -->
-                    <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 group relative" data-category="casamentos">
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 group relative"
+                         data-category="casamentos">
                         <img src="{{ asset('images/gallery/img-1.jpg') }}" alt="Casamento Elegante"
-                            class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                             class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
                         <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
                             <div class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center p-4">
                                 <h3 class="text-xl font-semibold mb-2">Casamento Elegante</h3>
                                 <p class="text-sm">Cerimônia luxuosa realizada em Lisboa.</p>
-                                <button class="mt-4 bg-white text-black px-3 py-1 rounded text-sm font-medium hover:bg-gray-200 gallery-zoom" data-src="{{ asset('images/gallery/img-1.jpg') }}">
+                                <button class="mt-4 bg-white text-black px-3 py-1 rounded text-sm font-medium hover:bg-gray-200 gallery-zoom"
+                                        data-src="{{ asset('images/gallery/img-1.jpg') }}">
                                     Ver
                                 </button>
                             </div>
@@ -66,14 +74,16 @@
                     </div>
 
                     <!-- Imagem 2 -->
-                    <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 group relative" data-category="eventos">
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 group relative"
+                         data-category="eventos">
                         <img src="{{ asset('images/gallery/img-2.jpg') }}" alt="Lançamento Corporativo"
-                            class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                             class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
                         <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
                             <div class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center p-4">
                                 <h3 class="text-xl font-semibold mb-2">Lançamento Corporativo</h3>
                                 <p class="text-sm">Evento de apresentação de novo produto.</p>
-                                <button class="mt-4 bg-white text-black px-3 py-1 rounded text-sm font-medium hover:bg-gray-200 gallery-zoom" data-src="{{ asset('images/gallery/img-2.jpg') }}">
+                                <button class="mt-4 bg-white text-black px-3 py-1 rounded text-sm font-medium hover:bg-gray-200 gallery-zoom"
+                                        data-src="{{ asset('images/gallery/img-2.jpg') }}">
                                     Ver
                                 </button>
                             </div>
@@ -84,14 +94,16 @@
                     </div>
 
                     <!-- Imagem 3 -->
-                    <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 group relative" data-category="retratos">
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 group relative"
+                         data-category="retratos">
                         <img src="{{ asset('images/gallery/img-3.jpg') }}" alt="Ensaio Profissional"
-                            class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                             class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
                         <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
                             <div class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center p-4">
                                 <h3 class="text-xl font-semibold mb-2">Ensaio Profissional</h3>
                                 <p class="text-sm">Fotos para perfil corporativo.</p>
-                                <button class="mt-4 bg-white text-black px-3 py-1 rounded text-sm font-medium hover:bg-gray-200 gallery-zoom" data-src="{{ asset('images/gallery/img-3.jpg') }}">
+                                <button class="mt-4 bg-white text-black px-3 py-1 rounded text-sm font-medium hover:bg-gray-200 gallery-zoom"
+                                        data-src="{{ asset('images/gallery/img-3.jpg') }}">
                                     Ver
                                 </button>
                             </div>
@@ -102,14 +114,16 @@
                     </div>
 
                     <!-- Imagem 4 -->
-                    <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 group relative" data-category="casamentos">
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 group relative"
+                         data-category="casamentos">
                         <img src="{{ asset('images/gallery/img-4.jpg') }}" alt="Cerimônia ao Ar Livre"
-                            class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                             class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
                         <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
                             <div class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center p-4">
                                 <h3 class="text-xl font-semibold mb-2">Cerimônia ao Ar Livre</h3>
                                 <p class="text-sm">Casamento realizado em jardim botânico.</p>
-                                <button class="mt-4 bg-white text-black px-3 py-1 rounded text-sm font-medium hover:bg-gray-200 gallery-zoom" data-src="{{ asset('images/gallery/img-4.jpg') }}">
+                                <button class="mt-4 bg-white text-black px-3 py-1 rounded text-sm font-medium hover:bg-gray-200 gallery-zoom"
+                                        data-src="{{ asset('images/gallery/img-4.jpg') }}">
                                     Ver
                                 </button>
                             </div>
@@ -120,14 +134,16 @@
                     </div>
 
                     <!-- Imagem 5 -->
-                    <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 group relative" data-category="eventos">
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 group relative"
+                         data-category="eventos">
                         <img src="{{ asset('images/gallery/img-5.jpg') }}" alt="Festival Cultural"
-                            class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                             class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
                         <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
                             <div class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center p-4">
                                 <h3 class="text-xl font-semibold mb-2">Festival Cultural</h3>
                                 <p class="text-sm">Registro de festival de música e arte.</p>
-                                <button class="mt-4 bg-white text-black px-3 py-1 rounded text-sm font-medium hover:bg-gray-200 gallery-zoom" data-src="{{ asset('images/gallery/img-5.jpg') }}">
+                                <button class="mt-4 bg-white text-black px-3 py-1 rounded text-sm font-medium hover:bg-gray-200 gallery-zoom"
+                                        data-src="{{ asset('images/gallery/img-5.jpg') }}">
                                     Ver
                                 </button>
                             </div>
@@ -138,14 +154,16 @@
                     </div>
 
                     <!-- Imagem 6 -->
-                    <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 group relative" data-category="retratos">
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 group relative"
+                         data-category="retratos">
                         <img src="{{ asset('images/gallery/img-6.jpg') }}" alt="Ensaio Artístico"
-                            class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                             class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
                         <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
                             <div class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center p-4">
                                 <h3 class="text-xl font-semibold mb-2">Ensaio Artístico</h3>
                                 <p class="text-sm">Fotos conceituais em estúdio.</p>
-                                <button class="mt-4 bg-white text-black px-3 py-1 rounded text-sm font-medium hover:bg-gray-200 gallery-zoom" data-src="{{ asset('images/gallery/img-6.jpg') }}">
+                                <button class="mt-4 bg-white text-black px-3 py-1 rounded text-sm font-medium hover:bg-gray-200 gallery-zoom"
+                                        data-src="{{ asset('images/gallery/img-6.jpg') }}">
                                     Ver
                                 </button>
                             </div>
@@ -156,14 +174,16 @@
                     </div>
 
                     <!-- Imagem 7 -->
-                    <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 group relative" data-category="casamentos">
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 group relative"
+                         data-category="casamentos">
                         <img src="{{ asset('images/gallery/img-7.jpg') }}" alt="Festa de Casamento"
-                            class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                             class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
                         <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
                             <div class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center p-4">
                                 <h3 class="text-xl font-semibold mb-2">Festa de Casamento</h3>
                                 <p class="text-sm">Recepção elegante com decoração personalizada.</p>
-                                <button class="mt-4 bg-white text-black px-3 py-1 rounded text-sm font-medium hover:bg-gray-200 gallery-zoom" data-src="{{ asset('images/gallery/img-7.jpg') }}">
+                                <button class="mt-4 bg-white text-black px-3 py-1 rounded text-sm font-medium hover:bg-gray-200 gallery-zoom"
+                                        data-src="{{ asset('images/gallery/img-7.jpg') }}">
                                     Ver
                                 </button>
                             </div>
@@ -174,14 +194,16 @@
                     </div>
 
                     <!-- Imagem 8 -->
-                    <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 group relative" data-category="eventos">
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 group relative"
+                         data-category="eventos">
                         <img src="{{ asset('images/gallery/img-8.jpg') }}" alt="Conferência Empresarial"
-                            class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                             class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
                         <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
                             <div class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center p-4">
                                 <h3 class="text-xl font-semibold mb-2">Conferência Empresarial</h3>
                                 <p class="text-sm">Registro de palestrantes e participantes.</p>
-                                <button class="mt-4 bg-white text-black px-3 py-1 rounded text-sm font-medium hover:bg-gray-200 gallery-zoom" data-src="{{ asset('images/gallery/img-8.jpg') }}">
+                                <button class="mt-4 bg-white text-black px-3 py-1 rounded text-sm font-medium hover:bg-gray-200 gallery-zoom"
+                                        data-src="{{ asset('images/gallery/img-8.jpg') }}">
                                     Ver
                                 </button>
                             </div>
@@ -194,7 +216,8 @@
 
                 <!-- Botão Ver Mais Fotos -->
                 <div class="text-center mt-10">
-                    <a href="{{ path('app_portfolio') }}" class="inline-block bg-white text-black font-medium px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors">
+                    <a href="{{ path('app_portfolio') }}"
+                       class="inline-block bg-white text-black font-medium px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors">
                         Ver Mais Fotos
                     </a>
                 </div>
@@ -223,11 +246,11 @@
                     <h3 class="text-xl font-bold mb-4 text-center">Vídeo em Destaque</h3>
                     <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-xl">
                         <iframe
-                            src="https://www.youtube.com/embed/h_H-oIWUJmY?si=qAS8oWyKSisxKOoi"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen
-                            class="w-full h-full"
+                                src="https://www.youtube.com/embed/h_H-oIWUJmY?si=qAS8oWyKSisxKOoi"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                                class="w-full h-full"
                         ></iframe>
                     </div>
                     <div class="mt-4 text-center">
@@ -242,11 +265,11 @@
                     <div class="video-item rounded-lg overflow-hidden shadow-lg" data-category="eventos">
                         <div class="aspect-w-16 aspect-h-9">
                             <iframe
-                                src="https://www.youtube.com/embed/IL879JU1Duo?si=GfmcMBPemkWtEM66"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen
-                                class="w-full h-full"
+                                    src="https://www.youtube.com/embed/IL879JU1Duo?si=GfmcMBPemkWtEM66"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen
+                                    class="w-full h-full"
                             ></iframe>
                         </div>
                         <div class="p-4 bg-black">
@@ -262,11 +285,11 @@
                     <div class="video-item rounded-lg overflow-hidden shadow-lg" data-category="comerciais">
                         <div class="aspect-w-16 aspect-h-9">
                             <iframe
-                                src="https://www.youtube.com/embed/d5nZ8RhB2pI?si=3WuHq8eSrITlfYj_"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen
-                                class="w-full h-full"
+                                    src="https://www.youtube.com/embed/d5nZ8RhB2pI?si=3WuHq8eSrITlfYj_"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen
+                                    class="w-full h-full"
                             ></iframe>
                         </div>
                         <div class="p-4 bg-black">
@@ -281,10 +304,13 @@
 
                 <!-- Botão Ver Mais Vídeos -->
                 <div class="text-center mt-10">
-                    <a href="https://www.youtube.com/channel/SEUCANAL" target="_blank" class="inline-block bg-white text-black font-medium px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors">
+                    <a href="https://www.youtube.com/channel/SEUCANAL" target="_blank"
+                       class="inline-block bg-white text-black font-medium px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors">
                         Ver Mais Vídeos
-                        <svg class="w-4 h-4 ml-2 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        <svg class="w-4 h-4 ml-2 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                         </svg>
                     </a>
                 </div>
@@ -295,19 +321,22 @@
     <!-- Galeria em modo fullscreen (modal) -->
     <div id="gallery-modal" class="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center hidden">
         <button id="close-modal" class="absolute top-4 right-4 text-white hover:text-gray-300 z-10">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                 xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
         </button>
 
         <button id="prev-image" class="absolute left-4 text-white hover:text-gray-300 z-10">
-            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                 xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
             </svg>
         </button>
 
         <button id="next-image" class="absolute right-4 text-white hover:text-gray-300 z-10">
-            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                 xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
             </svg>
         </button>
@@ -321,188 +350,3 @@
         </div>
     </div>
 </section>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Sistema de tabs (fotos e vídeos)
-        const galleryTabs = document.querySelectorAll('.gallery-tab');
-        const tabContents = document.querySelectorAll('.tab-content');
-
-        galleryTabs.forEach(tab => {
-            tab.addEventListener('click', function() {
-                // Remover classes active de todas as tabs
-                galleryTabs.forEach(t => {
-                    t.classList.remove('active', 'text-white', 'border-white');
-                    t.classList.add('text-gray-400', 'border-transparent');
-                });
-
-                // Adicionar classe active à tab clicada
-                this.classList.add('active', 'text-white', 'border-white');
-                this.classList.remove('text-gray-400', 'border-transparent');
-
-                // Esconder todos os conteúdos de tab
-                tabContents.forEach(content => {
-                    content.classList.add('hidden');
-                });
-
-                // Mostrar o conteúdo da tab selecionada
-                const tabId = this.getAttribute('data-tab') + '-content';
-                document.getElementById(tabId).classList.remove('hidden');
-            });
-        });
-
-        // Filtros de fotos
-        const photoFilters = document.querySelectorAll('.photo-filter');
-        const galleryItems = document.querySelectorAll('.gallery-item');
-
-        photoFilters.forEach(filter => {
-            filter.addEventListener('click', function() {
-                // Remover classe active de todos os filtros
-                photoFilters.forEach(f => {
-                    f.classList.remove('active', 'bg-white', 'text-black');
-                    f.classList.add('bg-black', 'text-white', 'border', 'border-gray-700');
-                });
-
-                // Adicionar classe active ao filtro clicado
-                this.classList.add('active', 'bg-white', 'text-black');
-                this.classList.remove('bg-black', 'text-white', 'border', 'border-gray-700');
-
-                // Filtrar os itens da galeria
-                const category = this.textContent.trim().toLowerCase();
-
-                galleryItems.forEach(item => {
-                    if (category === 'todos' || item.getAttribute('data-category').toLowerCase() === category) {
-                        item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-            });
-        });
-
-        // Filtros de vídeos
-        const videoFilters = document.querySelectorAll('.video-filter');
-        const videoItems = document.querySelectorAll('.video-item');
-
-        videoFilters.forEach(filter => {
-            filter.addEventListener('click', function() {
-                // Remover classe active de todos os filtros
-                videoFilters.forEach(f => {
-                    f.classList.remove('active', 'bg-white', 'text-black');
-                    f.classList.add('bg-black', 'text-white', 'border', 'border-gray-700');
-                });
-
-                // Adicionar classe active ao filtro clicado
-                this.classList.add('active', 'bg-white', 'text-black');
-                this.classList.remove('bg-black', 'text-white', 'border', 'border-gray-700');
-
-                // Filtrar os itens de vídeo
-                const category = this.textContent.trim().toLowerCase();
-
-                videoItems.forEach(item => {
-                    if (category === 'todos' || item.getAttribute('data-category').toLowerCase() === category) {
-                        item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-            });
-        });
-
-        // Galeria em modo fullscreen
-        const modal = document.getElementById('gallery-modal');
-        const modalImage = document.getElementById('modal-image');
-        const modalCaption = document.getElementById('modal-caption');
-        const modalCounter = document.getElementById('modal-counter');
-        const closeButton = document.getElementById('close-modal');
-        const prevButton = document.getElementById('prev-image');
-        const nextButton = document.getElementById('next-image');
-        const zoomButtons = document.querySelectorAll('.gallery-zoom');
-
-        let currentIndex = 0;
-        const galleryImages = Array.from(document.querySelectorAll('.gallery-item img'));
-
-        // Abrir modal ao clicar no botão de zoom
-        zoomButtons.forEach((button, index) => {
-            button.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const src = this.getAttribute('data-src');
-                const imgElement = galleryImages[index];
-                const alt = imgElement.alt;
-
-                openModal(src, alt, index);
-            });
-        });
-
-        // Clicar na imagem também deve abrir o modal
-        galleryImages.forEach((img, index) => {
-            img.addEventListener('click', function() {
-                openModal(this.src, this.alt, index);
-            });
-        });
-
-        // Fechar modal
-        closeButton.addEventListener('click', closeModal);
-
-        // Fechar modal ao pressionar ESC
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-
-            if (e.key === 'ArrowLeft') {
-                showPrevImage();
-            }
-
-            if (e.key === 'ArrowRight') {
-                showNextImage();
-            }
-        });
-
-        // Clicar fora do conteúdo também fecha o modal
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
-
-        // Navegar entre imagens
-        prevButton.addEventListener('click', showPrevImage);
-        nextButton.addEventListener('click', showNextImage);
-
-        function openModal(src, alt, index) {
-            modal.classList.remove('hidden');
-            modalImage.src = src;
-            modalImage.alt = alt;
-            modalCaption.textContent = alt;
-            currentIndex = index;
-            updateCounter();
-            document.body.classList.add('overflow-hidden');
-        }
-
-        function closeModal() {
-            modal.classList.add('hidden');
-            document.body.classList.remove('overflow-hidden');
-        }
-
-        function showPrevImage() {
-            currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-            modalImage.src = galleryImages[currentIndex].src;
-            modalImage.alt = galleryImages[currentIndex].alt;
-            modalCaption.textContent = galleryImages[currentIndex].alt;
-            updateCounter();
-        }
-
-        function showNextImage() {
-            currentIndex = (currentIndex + 1) % galleryImages.length;
-            modalImage.src = galleryImages[currentIndex].src;
-            modalImage.alt = galleryImages[currentIndex].alt;
-            modalCaption.textContent = galleryImages[currentIndex].alt;
-            updateCounter();
-        }
-
-        function updateCounter() {
-            modalCounter.textContent = `${currentIndex + 1} / ${galleryImages.length}`;
-        }
-    });
-</script>
