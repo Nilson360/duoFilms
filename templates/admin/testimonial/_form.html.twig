@@ -1,0 +1,57 @@
+{{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+        {{ form_label(form.clientName, 'Nome do Cliente', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+        {{ form_widget(form.clientName, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+        {{ form_errors(form.clientName, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+    </div>
+
+    <div>
+        {{ form_label(form.clientRole, 'Função/Empresa', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+        {{ form_widget(form.clientRole, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500', 'placeholder': 'Ex: CEO, TechPlus'}}) }}
+        {{ form_errors(form.clientRole, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+    </div>
+
+    <div>
+        {{ form_label(form.rating, 'Avaliação', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+        {{ form_widget(form.rating, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+        {{ form_errors(form.rating, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+    </div>
+
+    <div>
+        {{ form_label(form.date, 'Data', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+        {{ form_widget(form.date, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500', 'placeholder': 'Ex: Junho, 2024'}}) }}
+        {{ form_errors(form.date, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+    </div>
+</div>
+
+<div>
+    {{ form_label(form.content, 'Depoimento', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+    {{ form_widget(form.content, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500', 'rows': 4}}) }}
+    {{ form_errors(form.content, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+</div>
+
+{% if form.avatar is defined %}
+    <div>
+        {{ form_label(form.avatar, 'Foto do Cliente', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+
+        {% if testimonial is defined and testimonial.avatar %}
+            <div class="mb-3">
+                <img src="{{ asset('uploads/testimonials/' ~ testimonial.avatar) }}" alt="{{ testimonial.clientName }}" class="h-16 w-16 rounded-full object-cover">
+                <p class="text-xs text-gray-400 mt-1">Foto atual</p>
+            </div>
+        {% endif %}
+
+        {{ form_widget(form.avatar, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+        {{ form_errors(form.avatar, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+        <p class="text-xs text-gray-400 mt-1">Formatos recomendados: JPG, PNG. Tamanho ideal: 200x200px</p>
+    </div>
+{% endif %}
+
+<div class="pt-4">
+    <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-md flex items-center transition">
+        <i class="fas fa-save mr-2"></i>
+        <span>{{ button_label|default('Salvar') }}</span>
+    </button>
+</div>
+{{ form_end(form) }}

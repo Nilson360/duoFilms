@@ -1,0 +1,115 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Depoimentos | DuoFilms{% endblock %}
+{% block page_title %}Gerenciar Depoimentos{% endblock %}
+
+{% block content %}
+    <div class="flex justify-between items-center mb-6">
+        <div class="relative">
+            <input type="text" id="searchInput" placeholder="Pesquisar..." class="bg-gray-700 border border-gray-600 rounded-md py-2 px-4 pl-10 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div class="absolute left-3 top-2.5">
+                <i class="fas fa-search text-gray-400"></i>
+            </div>
+        </div>
+
+        <a href="{{ path('app_testimonial_new') }}" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md flex items-center transition">
+            <i class="fas fa-plus mr-2"></i>
+            <span>Novo Depoimento</span>
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for testimonial in testimonials %}
+            <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden h-full">
+                <div class="p-6 flex flex-col h-full">
+                    <div class="flex items-start mb-4">
+                        {% if testimonial.avatar is defined and testimonial.avatar %}
+                            <img src="{{ asset('uploads/testimonials/' ~ testimonial.avatar) }}" alt="{{ testimonial.clientName }}" class="w-12 h-12 rounded-full object-cover mr-4">
+                        {% else %}
+                            <div class="w-12 h-12 rounded-full bg-gray-600 flex items-center justify-center mr-4">
+                                <span class="text-lg font-semibold text-white">{{ testimonial.clientName|first|upper }}</span>
+                            </div>
+                        {% endif %}
+
+                        <div>
+                            <h3 class="text-lg font-semibold client-name">{{ testimonial.clientName }}</h3>
+                            <p class="text-sm text-gray-400">{{ testimonial.clientRole }}</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 flex">
+                        {% for i in 1..5 %}
+                            {% if i <= testimonial.rating %}
+                                <i class="fas fa-star text-yellow-500"></i>
+                            {% else %}
+                                <i class="far fa-star text-gray-500"></i>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    <div class="flex-grow">
+                        <div class="testimonial-content">
+                            <p class="text-gray-300 italic">{{ testimonial.content|striptags|slice(0, 150) }}{% if testimonial.content|length > 150 %}...{% endif %}</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 flex items-center justify-between">
+                        <span class="text-sm text-gray-400">{{ testimonial.date }}</span>
+
+                        <div class="flex space-x-3">
+                            <a href="{{ path('app_testimonial_show', {id: testimonial.id}) }}" class="text-blue-400 hover:text-blue-300">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="{{ path('app_testimonial_edit', {id: testimonial.id}) }}" class="text-yellow-400 hover:text-yellow-300">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="#" class="text-red-400 hover:text-red-300"
+                               onclick="if(confirm('Tem certeza que deseja eliminar este depoimento?')) { document.getElementById('delete-form-{{ testimonial.id }}').submit(); } return false;">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                            <form id="delete-form-{{ testimonial.id }}" action="{{ path('app_testimonial_delete', {id: testimonial.id}) }}" method="post" style="display: none;">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ testimonial.id) }}">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-span-full bg-gray-800 rounded-lg shadow-lg p-10 text-center">
+                <i class="fas fa-quote-right text-5xl text-gray-600 mb-4"></i>
+                <p class="text-xl text-gray-400 mb-6">Nenhum depoimento encontrado</p>
+                <a href="{{ path('app_testimonial_new') }}" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-md inline-flex items-center transition">
+                    <i class="fas fa-plus mr-2"></i>
+                    <span>Adicionar primeiro depoimento</span>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const testimonials = document.querySelectorAll('.bg-gray-800.rounded-lg.shadow-lg.overflow-hidden');
+
+            searchInput.addEventListener('keyup', function() {
+                const searchTerm = this.value.toLowerCase();
+
+                testimonials.forEach(testimonial => {
+                    const clientName = testimonial.querySelector('.client-name')?.textContent.toLowerCase() || '';
+                    const clientRole = testimonial.querySelector('.text-sm.text-gray-400')?.textContent.toLowerCase() || '';
+                    const content = testimonial.querySelector('.testimonial-content')?.textContent.toLowerCase() || '';
+
+                    const isVisible =
+                        clientName.includes(searchTerm) ||
+                        clientRole.includes(searchTerm) ||
+                        content.includes(searchTerm);
+
+                    testimonial.style.display = isVisible ? '' : 'none';
+                });
+            });
+        });
+    </script>
+{% endblock %}

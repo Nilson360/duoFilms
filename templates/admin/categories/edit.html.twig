@@ -1,0 +1,19 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Editar Categoria | DuoFilms{% endblock %}
+{% block page_title %}Editar Categoria{% endblock %}
+
+{% block content %}
+    <div class="bg-gray-800 rounded-lg shadow-lg p-6">
+        {{ include('admin/categories/_form.html.twig', {'button_label': 'Atualizar'}) }}
+
+        <div class="flex justify-between items-center mt-8">
+            <a href="{{ path('app_category_index') }}" class="text-blue-400 hover:text-blue-300 flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i>
+                <span>Voltar à lista</span>
+            </a>
+
+            {{ include('admin/categories/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

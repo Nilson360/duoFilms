@@ -51,6 +51,13 @@
                     <span>Multimédia</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ path('app_video_index') }}"
+                   class="flex items-center px-4 py-2 rounded-md {% if app.request.get('_route') starts with 'admin_multimedia' %}bg-gray-700{% else %}hover:bg-gray-700{% endif %} transition">
+                    <i class="fas fa-image mr-3"></i>
+                    <span>Vídeo</span>
+                </a>
+            </li>
 
             <li>
                 <a href="{{ path('admin_messages') }}"
@@ -59,7 +66,34 @@
                     <span>Mensagens</span>
                 </a>
             </li>
-
+            <li>
+                <a href="{{ path('app_testimonial_index') }}"
+                   class="flex items-center px-4 py-2 rounded-md {% if app.request.get('_route') starts with 'admin_messages' %}bg-gray-700{% else %}hover:bg-gray-700{% endif %} transition">
+                    <i class="fas fa-envelope mr-3"></i>
+                    <span>Depoimento</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('app_portfolio_admin_index') }}"
+                   class="flex items-center px-4 py-2 rounded-md {% if app.request.get('_route') starts with 'admin_messages' %}bg-gray-700{% else %}hover:bg-gray-700{% endif %} transition">
+                    <i class="fas fa-envelope mr-3"></i>
+                    <span>Portfólio</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('app_project_index') }}"
+                   class="flex items-center px-4 py-2 rounded-md {% if app.request.get('_route') starts with 'admin_messages' %}bg-gray-700{% else %}hover:bg-gray-700{% endif %} transition">
+                    <i class="fas fa-envelope mr-3"></i>
+                    <span>Projetos</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('app_category_index') }}"
+                   class="flex items-center px-4 py-2 rounded-md {% if app.request.get('_route') starts with 'admin_users' %}bg-gray-700{% else %}hover:bg-gray-700{% endif %} transition">
+                    <i class="fas fa-users mr-3"></i>
+                    <span>Categorias</span>
+                </a>
+            </li>
             <li>
                 <a href="{{ path('admin_users') }}"
                    class="flex items-center px-4 py-2 rounded-md {% if app.request.get('_route') starts with 'admin_users' %}bg-gray-700{% else %}hover:bg-gray-700{% endif %} transition">

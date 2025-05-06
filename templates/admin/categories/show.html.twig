@@ -1,0 +1,71 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Detalhes da Categoria | DuoFilms{% endblock %}
+{% block page_title %}Detalhes da Categoria{% endblock %}
+
+{% block content %}
+    <div class="bg-gray-800 rounded-lg shadow-lg p-6">
+        <div class="grid grid-cols-1 gap-6">
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <span class="text-gray-400 text-sm">ID:</span>
+                    <p class="text-lg">{{ category.id }}</p>
+                </div>
+                <div>
+                    <span class="text-gray-400 text-sm">Nome:</span>
+                    <p class="text-lg">{{ category.name }}</p>
+                </div>
+                <div class="col-span-2">
+                    <span class="text-gray-400 text-sm">Slug:</span>
+                    <p class="text-lg text-gray-300">{{ category.slug }}</p>
+                </div>
+
+                {% if category.description is defined %}
+                    <div class="col-span-2">
+                        <span class="text-gray-400 text-sm">Descrição:</span>
+                        <p class="text-gray-300 mt-1">{{ category.description|default('Nenhuma descrição disponível') }}</p>
+                    </div>
+                {% endif %}
+            </div>
+
+            {% if category.photos is defined %}
+                <div class="mt-6">
+                    <h3 class="text-lg font-semibold mb-4">Fotos nesta categoria ({{ category.photos|length }})</h3>
+
+                    {% if category.photos|length > 0 %}
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                            {% for photo in category.photos %}
+                                <div class="bg-gray-700 rounded overflow-hidden">
+                                    <img src="{{ asset('uploads/photos/' ~ photo.path) }}" alt="{{ photo.titlte }}" class="w-full h-32 object-cover">
+                                    <div class="p-3">
+                                        <p class="text-sm">{{ photo.titlte }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="bg-gray-700 p-6 rounded-lg text-center">
+                            <p class="text-gray-400">Nenhuma foto associada a esta categoria.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="flex justify-between items-center mt-8 space-x-4">
+            <a href="{{ path('app_category_index') }}" class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-md flex items-center transition">
+                <i class="fas fa-arrow-left mr-2"></i>
+                <span>Voltar à lista</span>
+            </a>
+
+            <div class="flex space-x-3">
+                <a href="{{ path('app_category_edit', {'id': category.id}) }}" class="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-md flex items-center transition">
+                    <i class="fas fa-edit mr-2"></i>
+                    <span>Editar</span>
+                </a>
+
+                {{ include('admin/categories/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

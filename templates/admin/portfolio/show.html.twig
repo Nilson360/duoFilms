@@ -1,0 +1,147 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Detalhes do Projeto | DuoFilms{% endblock %}
+{% block page_title %}Projeto: {{ portfolio.title }}{% endblock %}
+
+{% block content %}
+    <div class="bg-gray-800 rounded-lg shadow-lg p-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="md:col-span-2">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Informações do Projeto</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <span class="text-gray-400">Título:</span>
+                                <p class="text-white">{{ portfolio.title }}</p>
+                            </div>
+                            <div>
+                                <span class="text-gray-400">Categoria:</span>
+                                <p class="text-white">
+                                    {% if portfolio.category is defined and portfolio.category %}
+                                        {{ portfolio.category.name }}
+                                    {% else %}
+                                        <span class="text-gray-500">Sem categoria</span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div>
+                                <span class="text-gray-400">Localização:</span>
+                                <p class="text-white">{{ portfolio.location }}</p>
+                            </div>
+                            <div>
+                                <span class="text-gray-400">Data do Evento:</span>
+                                <p class="text-white">{{ portfolio.date ? portfolio.date|date('d/m/Y') : '' }}</p>
+                            </div>
+                            <div>
+                                <span class="text-gray-400">Criado em:</span>
+                                <p class="text-white">{{ portfolio.createdAt ? portfolio.createdAt|date('d/m/Y H:i') : '' }}</p>
+                            </div>
+                            <div>
+                                <span class="text-gray-400">Número de Fotos:</span>
+                                <p class="text-white">{{ portfolio.photoCount }}</p>
+                            </div>
+                            {% if portfolio.featured is defined %}
+                                <div>
+                                    <span class="text-gray-400">Destacado:</span>
+                                    <p class="text-white">
+                                        {% if portfolio.featured %}
+                                            <span class="bg-green-600 text-white text-xs px-2 py-1 rounded-full">Sim</span>
+                                        {% else %}
+                                            <span class="bg-gray-600 text-white text-xs px-2 py-1 rounded-full">Não</span>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Descrição</h3>
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <p class="text-gray-300">{{ portfolio.description|nl2br }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Imagem de Capa</h3>
+                {% if portfolio.featuredImage %}
+                    <div class="bg-gray-700 p-2 rounded-lg">
+                        <img src="{{ asset('uploads/portfolio/' ~ portfolio.featuredImage) }}" alt="{{ portfolio.title }}" class="w-full h-auto rounded">
+                    </div>
+                {% else %}
+                    <div class="bg-gray-700 p-6 rounded-lg flex flex-col items-center justify-center h-48">
+                        <i class="fas fa-image text-4xl text-gray-500 mb-3"></i>
+                        <p class="text-gray-400 text-center">Nenhuma imagem de capa definida</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if portfolio.photos is defined %}
+            <div class="mt-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold">Fotos deste Projeto</h3>
+
+                    <a href="#" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md flex items-center transition">
+                        <i class="fas fa-plus mr-2"></i>
+                        <span>Adicionar Fotos</span>
+                    </a>
+                </div>
+
+                {% if portfolio.photos|length > 0 %}
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                        {% for photo in portfolio.photos %}
+                            <div class="bg-gray-700 rounded overflow-hidden group relative">
+                                <img src="{{ asset('uploads/photos/' ~ photo.path) }}" alt="{{ photo.titlte }}" class="w-full h-32 object-cover">
+                                <div class="p-2">
+                                    <p class="text-sm truncate">{{ photo.titlte }}</p>
+                                </div>
+                                <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <div class="flex space-x-2">
+                                        <a href="#" class="bg-blue-600 hover:bg-blue-700 p-2 rounded-full">
+                                            <i class="fas fa-eye text-white"></i>
+                                        </a>
+                                        <a href="#" class="bg-yellow-600 hover:bg-yellow-700 p-2 rounded-full">
+                                            <i class="fas fa-edit text-white"></i>
+                                        </a>
+                                        <a href="#" class="bg-red-600 hover:bg-red-700 p-2 rounded-full">
+                                            <i class="fas fa-trash text-white"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="bg-gray-700 p-8 rounded-lg text-center">
+                        <i class="fas fa-images text-4xl text-gray-500 mb-3"></i>
+                        <p class="text-gray-400 mb-4">Nenhuma foto adicionada a este projeto ainda</p>
+                        <a href="#" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md inline-flex items-center transition">
+                            <i class="fas fa-plus mr-2"></i>
+                            <span>Adicionar Fotos</span>
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        <div class="flex justify-between items-center mt-8">
+            <a href="{{ path('app_portfolio_admin_index') }}" class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-md flex items-center transition">
+                <i class="fas fa-arrow-left mr-2"></i>
+                <span>Voltar à lista</span>
+            </a>
+
+            <div class="flex space-x-3">
+                <a href="{{ path('app_portfolio_admin_edit', {'id': portfolio.id}) }}" class="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-md flex items-center transition">
+                    <i class="fas fa-edit mr-2"></i>
+                    <span>Editar</span>
+                </a>
+
+                {{ include('admin/portfolio/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

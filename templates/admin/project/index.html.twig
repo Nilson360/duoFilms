@@ -1,0 +1,158 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Gerenciar Projetos | DuoFilms{% endblock %}
+{% block page_title %}Projetos{% endblock %}
+
+{% block content %}
+    <div class="flex justify-between items-center mb-6">
+        <div class="flex space-x-2">
+            <div class="relative">
+                <input type="text" id="searchInput" placeholder="Pesquisar..." class="bg-gray-700 border border-gray-600 rounded-md py-2 px-4 pl-10 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div class="absolute left-3 top-2.5">
+                    <i class="fas fa-search text-gray-400"></i>
+                </div>
+            </div>
+
+            <select id="categoryFilter" class="bg-gray-700 border border-gray-600 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="">Todos os clientes</option>
+                {% if clients is defined %}
+                    {% for client in clients %}
+                        <option value="{{ client }}">{{ client }}</option>
+                    {% endfor %}
+                {% endif %}
+            </select>
+        </div>
+
+        <a href="{{ path('app_project_new') }}" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md flex items-center transition">
+            <i class="fas fa-plus mr-2"></i>
+            <span>Novo Projeto</span>
+        </a>
+    </div>
+
+    <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+        <table class="min-w-full divide-y divide-gray-700">
+            <thead class="bg-gray-700">
+            <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                    Projeto
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                    Cliente
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                    Local
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                    Data
+                </th>
+                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider">
+                    Destacado
+                </th>
+                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-300 uppercase tracking-wider">
+                    Ações
+                </th>
+            </tr>
+            </thead>
+            <tbody class="bg-gray-800 divide-y divide-gray-700" id="projectsTable">
+            {% for project in projects %}
+                <tr class="hover:bg-gray-700 transition">
+                    <td class="px-6 py-4">
+                        <div class="flex items-center">
+                            {% if project.coverImage %}
+                                <div class="flex-shrink-0 h-10 w-10">
+                                    <img class="h-10 w-10 rounded-md object-cover" src="{{ asset('uploads/projects/' ~ project.coverImage) }}" alt="{{ project.name }}">
+                                </div>
+                            {% else %}
+                                <div class="flex-shrink-0 h-10 w-10 bg-gray-600 rounded-md flex items-center justify-center">
+                                    <i class="fas fa-image text-gray-400"></i>
+                                </div>
+                            {% endif %}
+                            <div class="ml-4">
+                                <div class="text-sm font-medium">{{ project.name }}</div>
+                                <div class="text-sm text-gray-400 truncate max-w-xs">{{ project.description|striptags|slice(0, 50) }}{% if project.description|length > 50 %}...{% endif %}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-300 client-name">{{ project.client }}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-300">{{ project.location }}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-300">{{ project.projectDate ? project.projectDate|date('d/m/Y') : '' }}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                        {% if project.featured %}
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                    Sim
+                                </span>
+                        {% else %}
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-600 text-gray-300">
+                                    Não
+                                </span>
+                        {% endif %}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <div class="flex justify-end space-x-3">
+                            <a href="{{ path('app_project_show', {id: project.id}) }}" class="text-blue-400 hover:text-blue-300">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="{{ path('app_project_edit', {id: project.id}) }}" class="text-yellow-400 hover:text-yellow-300">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="#" class="text-red-400 hover:text-red-300"
+                               onclick="if(confirm('Tem certeza que deseja eliminar este projeto?')) { document.getElementById('delete-form-{{ project.id }}').submit(); } return false;">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                            <form id="delete-form-{{ project.id }}" action="{{ path('app_project_delete', {id: project.id}) }}" method="post" style="display: none;">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ project.id) }}">
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6" class="px-6 py-10 text-center">
+                        <i class="fas fa-folder-open text-4xl text-gray-600 mb-3"></i>
+                        <p class="text-gray-400">Nenhum projeto encontrado</p>
+                        <a href="{{ path('app_project_new') }}" class="mt-4 inline-block bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md">
+                            Adicionar primeiro projeto
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const categoryFilter = document.getElementById('categoryFilter');
+            const projectsTable = document.getElementById('projectsTable');
+            const rows = projectsTable.querySelectorAll('tr');
+
+            function filterTable() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const clientValue = categoryFilter.value.toLowerCase();
+
+                rows.forEach(row => {
+                    const name = row.querySelector('td:first-child .text-sm.font-medium')?.textContent.toLowerCase() || '';
+                    const client = row.querySelector('.client-name')?.textContent.toLowerCase() || '';
+
+                    const matchesSearch = name.includes(searchTerm);
+                    const matchesClient = !clientValue || client === clientValue;
+
+                    row.style.display = (matchesSearch && matchesClient) ? '' : 'none';
+                });
+            }
+
+            searchInput.addEventListener('keyup', filterTable);
+            categoryFilter.addEventListener('change', filterTable);
+        });
+    </script>
+{% endblock %}

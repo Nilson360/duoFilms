@@ -2,22 +2,24 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Photo;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class Photo1Type extends AbstractType
+class CategoryForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('path')
-            ->add('category')
-            ->add('title')
-            ->add('description')
-            ->add('createAt', null, [
-                'widget' => 'single_text',
+            ->add('name')
+            ->add('slug')
+            ->add('photos', EntityType::class, [
+                'class' => Photo::class,
+                'choice_label' => 'id',
+                'multiple' => true,
             ])
         ;
     }
@@ -25,7 +27,7 @@ class Photo1Type extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Photo::class,
+            'data_class' => Category::class,
         ]);
     }
 }

@@ -42,6 +42,7 @@ class Photo
     public function __construct()
     {
         $this->category = new ArrayCollection();
+        $this->createAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int

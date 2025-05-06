@@ -1,0 +1,45 @@
+{{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+        {{ form_label(form.title, 'Título', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+        {{ form_widget(form.title, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+        {{ form_errors(form.title, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+    </div>
+
+    <div>
+        {{ form_label(form.youtubeId, 'ID do YouTube', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+        {{ form_widget(form.youtubeId, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500', 'placeholder': 'Ex: dQw4w9WgXcQ'}}) }}
+        {{ form_errors(form.youtubeId, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+        <p class="text-xs text-gray-400 mt-1">Digite apenas o ID do vídeo, não o URL completo</p>
+    </div>
+
+    {% if form.category is defined %}
+        <div>
+            {{ form_label(form.category, 'Categoria', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+            {{ form_widget(form.category, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+            {{ form_errors(form.category, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+        </div>
+    {% endif %}
+
+    {% if form.featured is defined %}
+        <div class="flex items-center px-4 py-2">
+            {{ form_label(form.featured, 'Destacado', {'label_attr': {'class': 'text-sm font-medium text-gray-300 mr-4'}}) }}
+            {{ form_widget(form.featured, {'attr': {'class': 'h-5 w-5 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+            {{ form_errors(form.featured, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+        </div>
+    {% endif %}
+</div>
+
+<div>
+    {{ form_label(form.description, 'Descrição', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+    {{ form_widget(form.description, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500', 'rows': 4}}) }}
+    {{ form_errors(form.description, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+</div>
+
+<div class="pt-4">
+    <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-md flex items-center transition">
+        <i class="fas fa-save mr-2"></i>
+        <span>{{ button_label|default('Salvar') }}</span>
+    </button>
+</div>
+{{ form_end(form) }}

@@ -1,0 +1,71 @@
+{{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+        {{ form_label(form.name, 'Nome do Projeto', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+        {{ form_widget(form.name, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+        {{ form_errors(form.name, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+    </div>
+
+    <div>
+        {{ form_label(form.client, 'Cliente', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+        {{ form_widget(form.client, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+        {{ form_errors(form.client, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+    </div>
+
+    <div>
+        {{ form_label(form.location, 'Localização', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+        {{ form_widget(form.location, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+        {{ form_errors(form.location, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+    </div>
+
+    <div>
+        {{ form_label(form.projectDate, 'Data do Projeto', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+        {{ form_widget(form.projectDate, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+        {{ form_errors(form.projectDate, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+    </div>
+
+    {% if form.category is defined %}
+        <div>
+            {{ form_label(form.category, 'Categoria', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+            {{ form_widget(form.category, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+            {{ form_errors(form.category, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+        </div>
+    {% endif %}
+
+    <div class="flex items-center px-4 py-2">
+        {{ form_label(form.featured, 'Destacado', {'label_attr': {'class': 'text-sm font-medium text-gray-300 mr-4'}}) }}
+        {{ form_widget(form.featured, {'attr': {'class': 'h-5 w-5 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+        {{ form_errors(form.featured, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+    </div>
+</div>
+
+<div>
+    {{ form_label(form.description, 'Descrição', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+    {{ form_widget(form.description, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500', 'rows': 4}}) }}
+    {{ form_errors(form.description, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+</div>
+
+{% if form.coverImage is defined %}
+    <div>
+        {{ form_label(form.coverImage, 'Imagem de Capa', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+
+        {% if project is defined and project.coverImage %}
+            <div class="mb-3">
+                <img src="{{ asset('uploads/projects/' ~ project.coverImage) }}" alt="Imagem de capa atual" class="h-32 rounded-md">
+                <p class="text-xs text-gray-400 mt-1">Imagem atual</p>
+            </div>
+        {% endif %}
+
+        {{ form_widget(form.coverImage, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+        {{ form_errors(form.coverImage, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+        <p class="text-xs text-gray-400 mt-1">Formatos recomendados: JPG, PNG. Tamanho ideal: 1200x800px</p>
+    </div>
+{% endif %}
+
+<div class="pt-4">
+    <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-md flex items-center transition">
+        <i class="fas fa-save mr-2"></i>
+        <span>{{ button_label|default('Salvar') }}</span>
+    </button>
+</div>
+{{ form_end(form) }}

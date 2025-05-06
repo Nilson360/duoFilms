@@ -1,0 +1,153 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Gerenciar Portfólio | DuoFilms{% endblock %}
+{% block page_title %}Projetos do Portfólio{% endblock %}
+
+{% block content %}
+    <div class="flex justify-between items-center mb-6">
+        <div class="flex space-x-2">
+            <div class="relative">
+                <input type="text" id="searchInput" placeholder="Pesquisar..." class="bg-gray-700 border border-gray-600 rounded-md py-2 px-4 pl-10 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div class="absolute left-3 top-2.5">
+                    <i class="fas fa-search text-gray-400"></i>
+                </div>
+            </div>
+
+            <select id="categoryFilter" class="bg-gray-700 border border-gray-600 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="">Todas categorias</option>
+                {% if categories is defined %}
+                    {% for category in categories %}
+                        <option value="{{ category.name }}">{{ category.name }}</option>
+                    {% endfor %}
+                {% endif %}
+            </select>
+        </div>
+
+        <a href="{{ path('app_portfolio_admin_new') }}" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md flex items-center transition">
+            <i class="fas fa-plus mr-2"></i>
+            <span>Novo Projeto</span>
+        </a>
+    </div>
+
+    <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+        <table class="min-w-full divide-y divide-gray-700">
+            <thead class="bg-gray-700">
+            <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                    Projeto
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                    Categoria
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                    Local
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                    Data
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                    Fotos
+                </th>
+                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-300 uppercase tracking-wider">
+                    Ações
+                </th>
+            </tr>
+            </thead>
+            <tbody class="bg-gray-800 divide-y divide-gray-700" id="portfolioTable">
+            {% for portfolio in portfolios %}
+                <tr class="hover:bg-gray-700 transition">
+                    <td class="px-6 py-4">
+                        <div class="flex items-center">
+                            {% if portfolio.featuredImage %}
+                                <div class="flex-shrink-0 h-10 w-10">
+                                    <img class="h-10 w-10 rounded-md object-cover" src="{{ asset('uploads/portfolio/' ~ portfolio.featuredImage) }}" alt="">
+                                </div>
+                            {% else %}
+                                <div class="flex-shrink-0 h-10 w-10 bg-gray-600 rounded-md flex items-center justify-center">
+                                    <i class="fas fa-image text-gray-400"></i>
+                                </div>
+                            {% endif %}
+                            <div class="ml-4">
+                                <div class="text-sm font-medium">{{ portfolio.title }}</div>
+                                <div class="text-sm text-gray-400 truncate max-w-xs">{{ portfolio.description|striptags|slice(0, 50) }}{% if portfolio.description|length > 50 %}...{% endif %}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-300">
+                            {% if portfolio.category is defined and portfolio.category %}
+                                <span class="category-name">{{ portfolio.category.name }}</span>
+                            {% else %}
+                                <span class="text-gray-500">Sem categoria</span>
+                            {% endif %}
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-300">{{ portfolio.location }}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-300">{{ portfolio.date ? portfolio.date|date('d/m/Y') : '' }}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-300">{{ portfolio.photoCount }}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <div class="flex justify-end space-x-3">
+                            <a href="{{ path('app_portfolio_admin_show', {id: portfolio.id}) }}" class="text-blue-400 hover:text-blue-300">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="{{ path('app_portfolio_admin_edit', {id: portfolio.id}) }}" class="text-yellow-400 hover:text-yellow-300">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="#" class="text-red-400 hover:text-red-300"
+                               onclick="if(confirm('Tem certeza que deseja eliminar este projeto?')) { document.getElementById('delete-form-{{ portfolio.id }}').submit(); } return false;">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                            <form id="delete-form-{{ portfolio.id }}" action="{{ path('app_portfolio_admin_delete', {id: portfolio.id}) }}" method="post" style="display: none;">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ portfolio.id) }}">
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6" class="px-6 py-10 text-center">
+                        <i class="fas fa-folder-open text-4xl text-gray-600 mb-3"></i>
+                        <p class="text-gray-400">Nenhum projeto encontrado</p>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const categoryFilter = document.getElementById('categoryFilter');
+            const portfolioTable = document.getElementById('portfolioTable');
+            const rows = portfolioTable.querySelectorAll('tr');
+
+            function filterTable() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const categoryValue = categoryFilter.value.toLowerCase();
+
+                rows.forEach(row => {
+                    const title = row.querySelector('td:first-child .text-sm.font-medium')?.textContent.toLowerCase() || '';
+                    const category = row.querySelector('.category-name')?.textContent.toLowerCase() || '';
+
+                    const matchesSearch = title.includes(searchTerm);
+                    const matchesCategory = !categoryValue || category === categoryValue;
+
+                    row.style.display = (matchesSearch && matchesCategory) ? '' : 'none';
+                });
+            }
+
+            searchInput.addEventListener('keyup', filterTable);
+            categoryFilter.addEventListener('change', filterTable);
+        });
+    </script>
+{% endblock %}

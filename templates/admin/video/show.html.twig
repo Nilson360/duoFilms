@@ -1,0 +1,83 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Detalhes do Vídeo | DuoFilms{% endblock %}
+{% block page_title %}Vídeo: {{ video.title }}{% endblock %}
+
+{% block content %}
+    <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
+            <div class="aspect-w-16 aspect-h-9">
+                <iframe
+                        src="https://www.youtube.com/embed/{{ video.youtubeId }}"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        class="w-full h-full rounded-lg"
+                ></iframe>
+            </div>
+
+            <div>
+                <div class="flex justify-between items-start mb-4">
+                    <h2 class="text-xl font-bold">{{ video.title }}</h2>
+
+                    {% if video.featured is defined and video.featured %}
+                        <span class="bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded-full">
+                        Destacado
+                    </span>
+                    {% endif %}
+                </div>
+
+                <div class="space-y-4">
+                    {% if video.category is defined and video.category %}
+                        <div>
+                            <span class="text-gray-400">Categoria:</span>
+                            <p class="text-white">{{ video.category.name }}</p>
+                        </div>
+                    {% endif %}
+
+                    <div>
+                        <span class="text-gray-400">ID do YouTube:</span>
+                        <p class="text-white font-mono bg-gray-700 px-2 py-1 rounded mt-1">{{ video.youtubeId }}</p>
+                    </div>
+
+                    <div>
+                        <span class="text-gray-400">URL do YouTube:</span>
+                        <a href="https://www.youtube.com/watch?v={{ video.youtubeId }}" target="_blank" class="text-blue-400 hover:text-blue-300 block mt-1 truncate">
+                            https://www.youtube.com/watch?v={{ video.youtubeId }}
+                        </a>
+                    </div>
+
+                    <div>
+                        <span class="text-gray-400">Data de Adição:</span>
+                        <p class="text-white">{{ video.createdAt ? video.createdAt|date('d/m/Y H:i') : '' }}</p>
+                    </div>
+
+                    {% if video.description %}
+                        <div>
+                            <span class="text-gray-400">Descrição:</span>
+                            <div class="bg-gray-700 p-4 rounded-lg mt-1">
+                                <p class="text-gray-300">{{ video.description|nl2br }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-between items-center p-6 border-t border-gray-700">
+            <a href="{{ path('app_video_index') }}" class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-md flex items-center transition">
+                <i class="fas fa-arrow-left mr-2"></i>
+                <span>Voltar à lista</span>
+            </a>
+
+            <div class="flex space-x-3">
+                <a href="{{ path('app_video_edit', {'id': video.id}) }}" class="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-md flex items-center transition">
+                    <i class="fas fa-edit mr-2"></i>
+                    <span>Editar</span>
+                </a>
+
+                {{ include('admin/video/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

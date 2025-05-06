@@ -1,0 +1,77 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Detalhes do Depoimento | DuoFilms{% endblock %}
+{% block page_title %}Depoimento de {{ testimonial.clientName }}{% endblock %}
+
+{% block content %}
+    <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+        <div class="p-6">
+            <div class="flex items-start mb-6">
+                {% if testimonial.avatar is defined and testimonial.avatar %}
+                    <img src="{{ asset('uploads/testimonials/' ~ testimonial.avatar) }}" alt="{{ testimonial.clientName }}" class="w-20 h-20 rounded-full object-cover mr-6">
+                {% else %}
+                    <div class="w-20 h-20 rounded-full bg-gray-600 flex items-center justify-center mr-6">
+                        <span class="text-2xl font-semibold text-white">{{ testimonial.clientName|first|upper }}</span>
+                    </div>
+                {% endif %}
+
+                <div>
+                    <h2 class="text-2xl font-bold">{{ testimonial.clientName }}</h2>
+                    <p class="text-lg text-gray-400">{{ testimonial.clientRole }}</p>
+
+                    <div class="mt-2 flex">
+                        {% for i in 1..5 %}
+                            {% if i <= testimonial.rating %}
+                                <i class="fas fa-star text-yellow-500 text-xl"></i>
+                            {% else %}
+                                <i class="far fa-star text-gray-500 text-xl"></i>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    <p class="text-sm text-gray-400 mt-2">{{ testimonial.date }}</p>
+                </div>
+            </div>
+
+            <div class="bg-gray-700 p-6 rounded-lg mb-6">
+                <div class="flex mb-2">
+                    <i class="fas fa-quote-left text-2xl text-gray-500 mr-2"></i>
+                </div>
+                <p class="text-gray-300 text-lg italic">{{ testimonial.content }}</p>
+                <div class="flex justify-end mt-2">
+                    <i class="fas fa-quote-right text-2xl text-gray-500 ml-2"></i>
+                </div>
+            </div>
+
+            <div class="bg-gray-700 p-4 rounded-lg">
+                <h3 class="text-lg font-semibold mb-2">Informações Adicionais</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <span class="text-gray-400">ID:</span>
+                        <p class="text-white">{{ testimonial.id }}</p>
+                    </div>
+                    <div>
+                        <span class="text-gray-400">Data de Adição:</span>
+                        <p class="text-white">{{ testimonial.createdAt ? testimonial.createdAt|date('d/m/Y H:i') : '' }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-between items-center p-6 border-t border-gray-700">
+            <a href="{{ path('app_testimonial_index') }}" class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-md flex items-center transition">
+                <i class="fas fa-arrow-left mr-2"></i>
+                <span>Voltar à lista</span>
+            </a>
+
+            <div class="flex space-x-3">
+                <a href="{{ path('app_testimonial_edit', {'id': testimonial.id}) }}" class="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-md flex items-center transition">
+                    <i class="fas fa-edit mr-2"></i>
+                    <span>Editar</span>
+                </a>
+
+                {{ include('admin/testimonial/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

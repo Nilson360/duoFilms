@@ -46,6 +46,7 @@ class Service
     public function __construct()
     {
         $this->serviceFeature = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int

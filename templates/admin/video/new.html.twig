@@ -1,0 +1,17 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Novo Vídeo | DuoFilms{% endblock %}
+{% block page_title %}Adicionar Novo Vídeo{% endblock %}
+
+{% block content %}
+    <div class="bg-gray-800 rounded-lg shadow-lg p-6">
+        {{ include('admin/video/_form.html.twig') }}
+
+        <div class="mt-6">
+            <a href="{{ path('app_video_index') }}" class="text-blue-400 hover:text-blue-300 flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i>
+                <span>Voltar à lista</span>
+            </a>
+        </div>
+    </div>
+{% endblock %}

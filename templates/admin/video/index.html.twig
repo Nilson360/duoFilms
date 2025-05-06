@@ -1,0 +1,123 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Gerenciar Vídeos | DuoFilms{% endblock %}
+{% block page_title %}Vídeos{% endblock %}
+
+{% block content %}
+    <div class="flex justify-between items-center mb-6">
+        <div class="flex space-x-2">
+            <div class="relative">
+                <input type="text" id="searchInput" placeholder="Pesquisar..." class="bg-gray-700 border border-gray-600 rounded-md py-2 px-4 pl-10 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div class="absolute left-3 top-2.5">
+                    <i class="fas fa-search text-gray-400"></i>
+                </div>
+            </div>
+
+            {% if categories is defined %}
+                <select id="categoryFilter" class="bg-gray-700 border border-gray-600 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">Todas categorias</option>
+                    {% for category in categories %}
+                        <option value="{{ category.name }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            {% endif %}
+        </div>
+
+        <a href="{{ path('app_video_new') }}" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md flex items-center transition">
+            <i class="fas fa-plus mr-2"></i>
+            <span>Novo Vídeo</span>
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for video in videos %}
+            <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                <div class="aspect-w-16 aspect-h-9">
+                    <iframe
+                            src="https://www.youtube.com/embed/{{ video.youtubeId }}"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                            class="w-full h-full"
+                    ></iframe>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-lg font-medium">{{ video.title }}</h3>
+
+                            {% if video.category is defined and video.category %}
+                                <p class="text-sm text-gray-400 category-name">{{ video.category.name }}</p>
+                            {% endif %}
+
+                            {% if video.description %}
+                                <p class="mt-2 text-gray-300 text-sm">{{ video.description|striptags|slice(0, 100) }}{% if video.description|length > 100 %}...{% endif %}</p>
+                            {% endif %}
+                        </div>
+
+                        {% if video.featured is defined and video.featured %}
+                            <span class="bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded-full">
+                            Destacado
+                        </span>
+                        {% endif %}
+                    </div>
+
+                    <div class="flex justify-end mt-4 space-x-3">
+                        <a href="{{ path('app_video_show', {id: video.id}) }}" class="text-blue-400 hover:text-blue-300">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                        <a href="{{ path('app_video_edit', {id: video.id}) }}" class="text-yellow-400 hover:text-yellow-300">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="#" class="text-red-400 hover:text-red-300"
+                           onclick="if(confirm('Tem certeza que deseja eliminar este vídeo?')) { document.getElementById('delete-form-{{ video.id }}').submit(); } return false;">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                        <form id="delete-form-{{ video.id }}" action="{{ path('app_video_delete', {id: video.id}) }}" method="post" style="display: none;">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ video.id) }}">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-span-full bg-gray-800 rounded-lg shadow-lg p-10 text-center">
+                <i class="fas fa-video text-5xl text-gray-600 mb-4"></i>
+                <p class="text-xl text-gray-400 mb-6">Nenhum vídeo encontrado</p>
+                <a href="{{ path('app_video_new') }}" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-md inline-flex items-center transition">
+                    <i class="fas fa-plus mr-2"></i>
+                    <span>Adicionar primeiro vídeo</span>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const categoryFilter = document.getElementById('categoryFilter');
+            const videos = document.querySelectorAll('.bg-gray-800.rounded-lg.shadow-lg.overflow-hidden');
+
+            function filterVideos() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const categoryValue = categoryFilter ? categoryFilter.value.toLowerCase() : '';
+
+                videos.forEach(video => {
+                    const title = video.querySelector('h3')?.textContent.toLowerCase() || '';
+                    const description = video.querySelector('p.text-gray-300')?.textContent.toLowerCase() || '';
+                    const category = video.querySelector('.category-name')?.textContent.toLowerCase() || '';
+
+                    const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+                    const matchesCategory = !categoryValue || category === categoryValue;
+
+                    video.style.display = (matchesSearch && matchesCategory) ? '' : 'none';
+                });
+            }
+
+            if (searchInput) searchInput.addEventListener('keyup', filterVideos);
+            if (categoryFilter) categoryFilter.addEventListener('change', filterVideos);
+        });
+    </script>
+{% endblock %}
