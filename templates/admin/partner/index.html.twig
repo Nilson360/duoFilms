@@ -1,0 +1,100 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Parceiros | DuoFilms{% endblock %}
+{% block page_title %}Gerenciar Parceiros{% endblock %}
+
+{% block content %}
+    <div class="flex justify-between items-center mb-6">
+        <div class="relative">
+            <input type="text" id="searchInput" placeholder="Pesquisar..." class="bg-gray-700 border border-gray-600 rounded-md py-2 px-4 pl-10 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div class="absolute left-3 top-2.5">
+                <i class="fas fa-search text-gray-400"></i>
+            </div>
+        </div>
+
+        <a href="{{ path('app_partner_new') }}" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md flex items-center transition">
+            <i class="fas fa-plus mr-2"></i>
+            <span>Novo Parceiro</span>
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {% for partner in partners %}
+            <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                <div class="p-6 flex flex-col items-center text-center">
+                    <div class="w-full h-24 bg-white rounded-lg flex items-center justify-center p-4 mb-4">
+                        {% if partner.logo %}
+                            <img src="{{ asset('uploads/partners/' ~ partner.logo) }}" alt="{{ partner.name }}" class="max-h-full max-w-full">
+                        {% else %}
+                            <div class="text-gray-400 font-medium">
+                                Sem logo
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <h3 class="text-lg font-semibold mb-1 partner-name">{{ partner.name }}</h3>
+
+                    {% if partner.website %}
+                        <a href="{{ partner.website }}" target="_blank" class="text-blue-400 hover:text-blue-300 text-sm truncate max-w-full mb-4">
+                            {{ partner.website }}
+                        </a>
+                    {% else %}
+                        <p class="text-gray-500 text-sm mb-4">Sem website</p>
+                    {% endif %}
+
+                    {% if partner.description is defined and partner.description %}
+                        <p class="text-gray-300 text-sm partner-description">{{ partner.description|striptags|slice(0, 100) }}{% if partner.description|length > 100 %}...{% endif %}</p>
+                    {% endif %}
+
+                    <div class="flex justify-center space-x-3 mt-4">
+                        <a href="{{ path('app_partner_show', {id: partner.id}) }}" class="text-blue-400 hover:text-blue-300">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                        <a href="{{ path('app_partner_edit', {id: partner.id}) }}" class="text-yellow-400 hover:text-yellow-300">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="#" class="text-red-400 hover:text-red-300"
+                           onclick="if(confirm('Tem certeza que deseja eliminar este parceiro?')) { document.getElementById('delete-form-{{ partner.id }}').submit(); } return false;">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                        <form id="delete-form-{{ partner.id }}" action="{{ path('app_partner_delete', {id: partner.id}) }}" method="post" style="display: none;">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ partner.id) }}">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-span-full bg-gray-800 rounded-lg shadow-lg p-10 text-center">
+                <i class="fas fa-handshake text-5xl text-gray-600 mb-4"></i>
+                <p class="text-xl text-gray-400 mb-6">Nenhum parceiro encontrado</p>
+                <a href="{{ path('app_partner_new') }}" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-md inline-flex items-center transition">
+                    <i class="fas fa-plus mr-2"></i>
+                    <span>Adicionar primeiro parceiro</span>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const partners = document.querySelectorAll('.bg-gray-800.rounded-lg.shadow-lg.overflow-hidden');
+
+            searchInput.addEventListener('keyup', function() {
+                const searchTerm = this.value.toLowerCase();
+
+                partners.forEach(partner => {
+                    const name = partner.querySelector('.partner-name')?.textContent.toLowerCase() || '';
+                    const description = partner.querySelector('.partner-description')?.textContent.toLowerCase() || '';
+
+                    const isVisible = name.includes(searchTerm) || description.includes(searchTerm);
+
+                    partner.style.display = isVisible ? '' : 'none';
+                });
+            });
+        });
+    </script>
+{% endblock %}

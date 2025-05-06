@@ -1,26 +1,28 @@
 {{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
-<div>
-    {{ form_label(form.name, 'Nome', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
-    {{ form_widget(form.name, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
-    {{ form_errors(form.name, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
-</div>
-
-{% if form.slug is defined %}
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     <div>
-        {{ form_label(form.slug, 'Slug', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+        {{ form_label(form.name, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+        {{ form_widget(form.name, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+        {{ form_errors(form.name, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+        {% if form.name.vars.help is defined %}
+            <p class="text-xs text-gray-400 mt-1">{{ form.name.vars.help }}</p>
+        {% endif %}
+    </div>
+
+    <div>
+        {{ form_label(form.slug, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
         {{ form_widget(form.slug, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
         {{ form_errors(form.slug, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
-        <p class="text-xs text-gray-400 mt-1">Deixe em branco para gerar automaticamente a partir do nome</p>
+        <p class="text-xs text-gray-400 mt-1">{{ form.slug.vars.help }}</p>
     </div>
-{% endif %}
+</div>
 
-    {% if form.description is defined %}
-        <div>
-            {{ form_label(form.description, 'Descrição', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
-            {{ form_widget(form.description, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500', 'rows': 4}}) }}
-            {{ form_errors(form.description, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
-        </div>
-    {% endif %}
+<div>
+    {{ form_label(form.photos, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+    {{ form_widget(form.photos, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+    {{ form_errors(form.photos, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+    <p class="text-xs text-gray-400 mt-1">{{ form.photos.vars.help }}</p>
+</div>
 
 <div class="pt-4">
     <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-md flex items-center transition">
@@ -29,3 +31,17 @@
     </button>
 </div>
 {{ form_end(form) }}
+
+{% block javascripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof $ !== 'undefined' && $.fn.select2) {
+                $('.select2').select2({
+                    theme: 'dark',
+                    placeholder: 'Selecione as fotos',
+                    allowClear: true
+                });
+            }
+        });
+    </script>
+{% endblock %}

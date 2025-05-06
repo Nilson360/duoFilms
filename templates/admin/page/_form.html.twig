@@ -1,0 +1,60 @@
+{{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+        {{ form_label(form.title, 'Título', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+        {{ form_widget(form.title, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+        {{ form_errors(form.title, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+    </div>
+
+    {% if form.isPublished is defined %}
+        <div class="flex items-center py-2">
+            {{ form_widget(form.isPublished, {'attr': {'class': 'h-5 w-5 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 mr-2'}}) }}
+            {{ form_label(form.isPublished, 'Publicada', {'label_attr': {'class': 'text-sm font-medium text-gray-300'}}) }}
+            {{ form_errors(form.isPublished, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+        </div>
+    {% endif %}
+
+    {% if form.showInFooter is defined %}
+        <div class="flex items-center py-2">
+            {{ form_widget(form.showInFooter, {'attr': {'class': 'h-5 w-5 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 mr-2'}}) }}
+            {{ form_label(form.showInFooter, 'Mostrar no Rodapé', {'label_attr': {'class': 'text-sm font-medium text-gray-300'}}) }}
+            {{ form_errors(form.showInFooter, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+        </div>
+    {% endif %}
+</div>
+
+<div>
+    {{ form_label(form.content, 'Conteúdo', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+    {{ form_widget(form.content, {'attr': {
+        'class': 'wysiwyg-editor bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500',
+    }}) }}
+    {{ form_errors(form.content, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+    <p class="text-xs text-gray-400 mt-1">Use o editor para formatar o conteúdo</p>
+</div>
+
+<div class="pt-4">
+    <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-md flex items-center transition">
+        <i class="fas fa-save mr-2"></i>
+        <span>{{ button_label|default('Salvar') }}</span>
+    </button>
+</div>
+{{ form_end(form) }}
+
+{# Incluir TinyMCE #}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.7.0/tinymce.min.js" integrity="sha512-kGk8SWqEKL++W3hbJ4O40ijgfX6nA5GOsQdw8YXUea7FZkK7O0coGxsaAyV2wRXoOn+y1TCzwi+p1pqWUUXy+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    tinymce.init({
+        selector: '.wysiwyg-editor',
+        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+        skin: 'oxide-dark',
+        content_css: 'dark',
+        height: 400,
+        menubar: true,
+        setup: function (editor) {
+            editor.on('change', function () {
+                editor.save();
+            });
+        }
+    });
+</script>

@@ -1,0 +1,17 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Novo Parceiro | DuoFilms{% endblock %}
+{% block page_title %}Adicionar Novo Parceiro{% endblock %}
+
+{% block content %}
+    <div class="bg-gray-800 rounded-lg shadow-lg p-6">
+        {{ include('admin/partner/_form.html.twig') }}
+
+        <div class="mt-6">
+            <a href="{{ path('app_partner_index') }}" class="text-blue-400 hover:text-blue-300 flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i>
+                <span>Voltar à lista</span>
+            </a>
+        </div>
+    </div>
+{% endblock %}

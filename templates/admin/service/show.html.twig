@@ -1,0 +1,102 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Detalhes do Serviço | DuoFilms{% endblock %}
+{% block page_title %}Serviço: {{ service.name }}{% endblock %}
+
+{% block content %}
+    <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="md:col-span-2 p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h2 class="text-2xl font-bold">{{ service.name }}</h2>
+
+                        {% if service.category is defined and service.category %}
+                            <p class="text-lg text-gray-400">{{ service.category.name }}</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="flex space-x-2">
+                        {% if service.featured %}
+                            <span class="bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+                                Premium
+                            </span>
+                        {% endif %}
+
+                        {% if service.isPopular %}
+                            <span class="bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded-full">
+                                Mais Popular
+                            </span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="bg-gray-700 p-4 rounded-lg mb-6">
+                    <h3 class="text-lg font-semibold mb-2">Descrição</h3>
+                    <p class="text-gray-300">{{ service.description|nl2br }}</p>
+                </div>
+
+                {% if service.features|length > 0 %}
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold mb-4">Características do Serviço</h3>
+                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            {% for feature in service.features %}
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                    <span class="text-gray-300">{{ feature.name }}</span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="p-6">
+                <h3 class="text-lg font-semibold mb-4">Imagem do Serviço</h3>
+
+                {% if service.thumbnail %}
+                    <div class="bg-gray-700 p-2 rounded-lg">
+                        <img src="{{ asset('uploads/services/' ~ service.thumbnail) }}" alt="{{ service.name }}" class="w-full h-auto rounded">
+                    </div>
+                {% else %}
+                    <div class="bg-gray-700 p-6 rounded-lg flex flex-col items-center justify-center h-48">
+                        <i class="fas fa-camera text-4xl text-gray-500 mb-3"></i>
+                        <p class="text-gray-400 text-center">Nenhuma imagem definida</p>
+                    </div>
+                {% endif %}
+
+                <div class="mt-6 bg-gray-700 p-4 rounded-lg">
+                    <h3 class="text-lg font-semibold mb-2">Informações Adicionais</h3>
+
+                    <div class="space-y-3">
+                        <div>
+                            <span class="text-gray-400">Data de Criação:</span>
+                            <p class="text-white">{{ service.createdAt ? service.createdAt|date('d/m/Y H:i') : '' }}</p>
+                        </div>
+
+                        <div>
+                            <span class="text-gray-400">Última Atualização:</span>
+                            <p class="text-white">{{ service.updatedAt ? service.updatedAt|date('d/m/Y H:i') : 'Nunca' }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-between items-center p-6 border-t border-gray-700">
+            <a href="{{ path('app_service_index') }}" class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-md flex items-center transition">
+                <i class="fas fa-arrow-left mr-2"></i>
+                <span>Voltar à lista</span>
+            </a>
+
+            <div class="flex space-x-3">
+                <a href="{{ path('app_service_edit', {'id': service.id}) }}" class="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-md flex items-center transition">
+                    <i class="fas fa-edit mr-2"></i>
+                    <span>Editar</span>
+                </a>
+
+                {{ include('admin/service/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

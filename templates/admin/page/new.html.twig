@@ -1,0 +1,17 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Nova Página | DuoFilms{% endblock %}
+{% block page_title %}Adicionar Nova Página{% endblock %}
+
+{% block content %}
+    <div class="bg-gray-800 rounded-lg shadow-lg p-6">
+        {{ include('admin/page/_form.html.twig') }}
+
+        <div class="mt-6">
+            <a href="{{ path('app_page_index') }}" class="text-blue-400 hover:text-blue-300 flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i>
+                <span>Voltar à lista</span>
+            </a>
+        </div>
+    </div>
+{% endblock %}

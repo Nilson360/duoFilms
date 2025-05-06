@@ -1,0 +1,150 @@
+{{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+        {{ form_label(form.name, 'Nome do Serviço', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+        {{ form_widget(form.name, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+        {{ form_errors(form.name, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+    </div>
+
+    {% if form.category is defined %}
+        <div>
+            {{ form_label(form.category, 'Categoria', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+            {{ form_widget(form.category, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+            {{ form_errors(form.category, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+        </div>
+    {% endif %}
+
+    <div class="flex flex-col space-y-2">
+        {% if form.featured is defined %}
+            <div class="flex items-center py-2">
+                {{ form_widget(form.featured, {'attr': {'class': 'h-5 w-5 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 mr-2'}}) }}
+                {{ form_label(form.featured, 'Serviço Premium', {'label_attr': {'class': 'text-sm font-medium text-gray-300'}}) }}
+                {{ form_errors(form.featured, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+            </div>
+        {% endif %}
+
+        {% if form.isPopular is defined %}
+            <div class="flex items-center py-2">
+                {{ form_widget(form.isPopular, {'attr': {'class': 'h-5 w-5 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 mr-2'}}) }}
+                {{ form_label(form.isPopular, 'Mais Popular', {'label_attr': {'class': 'text-sm font-medium text-gray-300'}}) }}
+                {{ form_errors(form.isPopular, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div>
+        {{ form_label(form.thumbnail, 'Imagem de Capa', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+
+        {% if service is defined and service.thumbnail %}
+            <div class="mb-3">
+                <img src="{{ asset('uploads/services/' ~ service.thumbnail) }}" alt="{{ service.name }}" class="h-32 rounded-md object-cover">
+                <p class="text-xs text-gray-400 mt-1">Imagem atual</p>
+            </div>
+        {% endif %}
+
+        {{ form_widget(form.thumbnail, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+        {{ form_errors(form.thumbnail, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+        <p class="text-xs text-gray-400 mt-1">Formatos recomendados: JPG, PNG. Tamanho ideal: 800x600px</p>
+    </div>
+</div>
+
+<div>
+    {{ form_label(form.description, 'Descrição', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+    {{ form_widget(form.description, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500', 'rows': 4}}) }}
+    {{ form_errors(form.description, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+</div>
+
+{% if form.features is defined %}
+    <div id="features-container">
+        <label class="block text-sm font-medium text-gray-300 mb-2">Características do Serviço</label>
+
+        <div
+                data-prototype="{{ form_widget(form.features.vars.prototype)|e('html_attr') }}"
+                data-widget-tags="{{ '<div class="relative flex items-center mb-2"></div>'|e }}"
+                data-widget-counter="{{ form.features|length }}"
+                class="space-y-2"
+        >
+            {% for featureField in form.features %}
+                <div class="relative flex items-center mb-2">
+                    {{ form_widget(featureField, {
+                        'attr': {
+                            'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 pl-10 pr-10 w-full focus:outline-none focus:ring-2 focus:ring-blue-500',
+                            'placeholder': 'Ex: Equipe de fotógrafos experientes'
+                        }
+                    }) }}
+                    <div class="absolute left-3 top-2.5">
+                        <i class="fas fa-check-circle text-green-500"></i>
+                    </div>
+                    <button type="button" class="absolute right-2 top-2 text-red-400 hover:text-red-300 delete-feature">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+
+        <button type="button" class="mt-2 bg-green-600 hover:bg-green-700 px-4 py-1 rounded-md text-sm flex items-center transition" id="add-feature">
+            <i class="fas fa-plus mr-2"></i>
+            <span>Adicionar Característica</span>
+        </button>
+    </div>
+{% endif %}
+
+<div class="pt-4">
+    <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-md flex items-center transition">
+        <i class="fas fa-save mr-2"></i>
+        <span>{{ button_label|default('Salvar') }}</span>
+    </button>
+</div>
+{{ form_end(form) }}
+
+{% block javascripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Features Collection Handling
+            const featuresContainer = document.getElementById('features-container');
+            if (featuresContainer) {
+                const addFeatureButton = document.getElementById('add-feature');
+                const featuresDiv = featuresContainer.querySelector('[data-prototype]');
+                const widgetCounter = featuresDiv.dataset.widgetCounter;
+                const widgetTags = featuresDiv.dataset.widgetTags;
+
+                addFeatureButton.addEventListener('click', function() {
+                    const counter = parseInt(featuresDiv.dataset.widgetCounter) + 1;
+                    const newWidget = featuresDiv.dataset.prototype.replace(/__name__/g, counter);
+                    const newElement = document.createElement('div');
+                    newElement.innerHTML = widgetTags;
+                    newElement.querySelector('div').innerHTML = newWidget;
+
+                    const deleteButton = newElement.querySelector('div').appendChild(document.createElement('button'));
+                    deleteButton.type = 'button';
+                    deleteButton.className = 'absolute right-2 top-2 text-red-400 hover:text-red-300 delete-feature';
+                    deleteButton.innerHTML = '<i class="fas fa-times"></i>';
+
+                    const checkIcon = document.createElement('div');
+                    checkIcon.className = 'absolute left-3 top-2.5';
+                    checkIcon.innerHTML = '<i class="fas fa-check-circle text-green-500"></i>';
+                    newElement.querySelector('div').appendChild(checkIcon);
+
+                    // Add placeholders and styling to the new input
+                    const input = newElement.querySelector('input');
+                    input.className = 'bg-gray-700 border border-gray-600 rounded-md py-2 pl-10 pr-10 w-full focus:outline-none focus:ring-2 focus:ring-blue-500';
+                    input.placeholder = 'Ex: Equipe de fotógrafos experientes';
+
+                    deleteButton.addEventListener('click', function() {
+                        newElement.querySelector('div').remove();
+                    });
+
+                    featuresDiv.appendChild(newElement.querySelector('div'));
+                    featuresDiv.dataset.widgetCounter = counter.toString();
+                });
+
+                // Add delete functionality to existing features
+                document.querySelectorAll('.delete-feature').forEach(button => {
+                    button.addEventListener('click', function() {
+                        this.closest('.relative').remove();
+                    });
+                });
+            }
+        });
+    </script>
+{% endblock %}

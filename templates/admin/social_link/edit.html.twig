@@ -1,0 +1,19 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Editar Rede Social | DuoFilms{% endblock %}
+{% block page_title %}Editar Rede Social: {{ socialLink.platform }}{% endblock %}
+
+{% block content %}
+    <div class="bg-gray-800 rounded-lg shadow-lg p-6">
+        {{ include('admin/social_link/_form.html.twig', {'button_label': 'Atualizar'}) }}
+
+        <div class="flex justify-between items-center mt-8">
+            <a href="{{ path('app_social_link_index') }}" class="text-blue-400 hover:text-blue-300 flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i>
+                <span>Voltar à lista</span>
+            </a>
+
+            {{ include('admin/social_link/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

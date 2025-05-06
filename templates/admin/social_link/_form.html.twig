@@ -1,0 +1,38 @@
+{{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+        {{ form_label(form.platform, 'Plataforma', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+        {{ form_widget(form.platform, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+        {{ form_errors(form.platform, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+    </div>
+
+    <div>
+        {{ form_label(form.url, 'URL', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+        {{ form_widget(form.url, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500', 'placeholder': 'https://...'}}) }}
+        {{ form_errors(form.url, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+    </div>
+
+    <div>
+        {{ form_label(form.icon, 'Ícone', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+        {{ form_widget(form.icon, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500', 'placeholder': 'fa-instagram'}}) }}
+        {{ form_errors(form.icon, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+        <p class="text-xs text-gray-400 mt-1">Nome do ícone Font Awesome, ex: fa-instagram, fa-facebook</p>
+    </div>
+
+    {% if form.displayOrder is defined %}
+        <div>
+            {{ form_label(form.displayOrder, 'Ordem de Exibição', {'label_attr': {'class': 'block text-sm font-medium text-gray-300 mb-2'}}) }}
+            {{ form_widget(form.displayOrder, {'attr': {'class': 'bg-gray-700 border border-gray-600 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+            {{ form_errors(form.displayOrder, {'attr': {'class': 'text-red-500 text-sm mt-1'}}) }}
+            <p class="text-xs text-gray-400 mt-1">Menor número = primeira posição</p>
+        </div>
+    {% endif %}
+</div>
+
+<div class="pt-4">
+    <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-md flex items-center transition">
+        <i class="fas fa-save mr-2"></i>
+        <span>{{ button_label|default('Salvar') }}</span>
+    </button>
+</div>
+{{ form_end(form) }}

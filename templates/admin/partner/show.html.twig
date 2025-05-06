@@ -1,0 +1,84 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Detalhes do Parceiro | DuoFilms{% endblock %}
+{% block page_title %}Parceiro: {{ partner.name }}{% endblock %}
+
+{% block content %}
+    <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+        <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="flex flex-col">
+                <h3 class="text-lg font-semibold mb-4">Informações do Parceiro</h3>
+
+                <div class="space-y-4">
+                    <div>
+                        <span class="text-gray-400">Nome:</span>
+                        <p class="text-white text-lg">{{ partner.name }}</p>
+                    </div>
+
+                    <div>
+                        <span class="text-gray-400">Website:</span>
+                        {% if partner.website %}
+                            <a href="{{ partner.website }}" target="_blank" class="text-blue-400 hover:text-blue-300 block">
+                                {{ partner.website }}
+                            </a>
+                        {% else %}
+                            <p class="text-gray-500">Não informado</p>
+                        {% endif %}
+                    </div>
+
+                    {% if partner.description is defined %}
+                        <div>
+                            <span class="text-gray-400">Descrição:</span>
+                            {% if partner.description %}
+                                <div class="bg-gray-700 p-4 rounded-lg mt-2">
+                                    <p class="text-gray-300">{{ partner.description }}</p>
+                                </div>
+                            {% else %}
+                                <p class="text-gray-500">Sem descrição</p>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+
+                    <div>
+                        <span class="text-gray-400">Adicionado em:</span>
+                        <p class="text-white">{{ partner.createdAt ? partner.createdAt|date('d/m/Y H:i') : '' }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center">
+                <h3 class="text-lg font-semibold mb-4 w-full">Logo</h3>
+
+                <div class="bg-white rounded-lg p-8 flex items-center justify-center w-full max-w-md h-48">
+                    {% if partner.logo %}
+                        <img src="{{ asset('uploads/partners/' ~ partner.logo) }}" alt="{{ partner.name }}" class="max-h-full max-w-full">
+                    {% else %}
+                        <div class="text-gray-400 font-medium">
+                            Nenhuma logo adicionada
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mt-4 text-sm text-gray-400 text-center">
+                    O logo aparecerá na seção "Eles confiam em nós" no site
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-between items-center p-6 border-t border-gray-700">
+            <a href="{{ path('app_partner_index') }}" class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-md flex items-center transition">
+                <i class="fas fa-arrow-left mr-2"></i>
+                <span>Voltar à lista</span>
+            </a>
+
+            <div class="flex space-x-3">
+                <a href="{{ path('app_partner_edit', {'id': partner.id}) }}" class="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-md flex items-center transition">
+                    <i class="fas fa-edit mr-2"></i>
+                    <span>Editar</span>
+                </a>
+
+                {{ include('admin/partner/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

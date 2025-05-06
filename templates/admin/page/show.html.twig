@@ -1,0 +1,78 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Detalhes da Página | DuoFilms{% endblock %}
+{% block page_title %}Página: {{ page.title }}{% endblock %}
+
+{% block content %}
+    <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+        <div class="border-b border-gray-700 p-6">
+            <div class="flex justify-between items-start">
+                <div>
+                    <h2 class="text-2xl font-bold">{{ page.title }}</h2>
+                    <p class="text-gray-400 font-mono">{{ page.slug }}</p>
+                </div>
+
+                <div class="flex space-x-2">
+                    {% if page.isPublished %}
+                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                            Publicada
+                        </span>
+                    {% else %}
+                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-gray-600 text-gray-300">
+                            Rascunho
+                        </span>
+                    {% endif %}
+
+                    {% if page.showInFooter %}
+                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+                            No Rodapé
+                        </span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                <div>
+                    <span class="text-gray-400 text-sm">Criado em:</span>
+                    <p class="text-gray-300">{{ page.createdAt ? page.createdAt|date('d/m/Y H:i') : '' }}</p>
+                </div>
+
+                <div>
+                    <span class="text-gray-400 text-sm">Atualizado em:</span>
+                    <p class="text-gray-300">{{ page.updatedAt ? page.updatedAt|date('d/m/Y H:i') : '' }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-6">
+            <h3 class="text-lg font-semibold mb-4">Visualização da Página</h3>
+
+            <div class="bg-white text-gray-800 rounded-lg p-6 prose prose-sm max-w-none">
+                {{ page.content|markdown_to_html }}
+            </div>
+        </div>
+
+        <div class="flex justify-between items-center p-6 border-t border-gray-700">
+            <a href="{{ path('app_page_index') }}" class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-md flex items-center transition">
+                <i class="fas fa-arrow-left mr-2"></i>
+                <span>Voltar à lista</span>
+            </a>
+
+            <div class="flex space-x-3">
+                <a href="{{ path('app_page_edit', {'id': page.id}) }}" class="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-md flex items-center transition">
+                    <i class="fas fa-edit mr-2"></i>
+                    <span>Editar</span>
+                </a>
+
+                {% if page.slug %}
+                    <a href="{{ path('app_page_preview', {'slug': page.slug}) }}" target="_blank" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md flex items-center transition">
+                        <i class="fas fa-external-link-alt mr-2"></i>
+                        <span>Ver no Site</span>
+                    </a>
+                {% endif %}
+
+                {{ include('admin/page/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
