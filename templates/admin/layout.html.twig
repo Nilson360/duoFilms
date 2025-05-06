@@ -1,4 +1,3 @@
-{# templates/admin/layout.html.twig #}
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -10,7 +9,7 @@
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
     <style>
-        html{
+        html {
             scroll-behavior: smooth;
         }
     </style>
@@ -32,7 +31,8 @@
     <nav class="flex-1 py-4 px-2">
         <ul class="space-y-1">
             <li>
-                <a href="{{ path('admin_dashboard') }}" class="flex items-center px-4 py-2 rounded-md {% if app.request.get('_route') == 'admin_dashboard' %}bg-gray-700{% else %}hover:bg-gray-700{% endif %} transition">
+                <a href="{{ path('admin_dashboard') }}"
+                   class="flex items-center px-4 py-2 rounded-md {% if app.request.get('_route') == 'admin_dashboard' %}bg-gray-700{% else %}hover:bg-gray-700{% endif %} transition">
                     <i class="fas fa-home mr-3"></i>
                     <span>Painel Inicial</span>
                 </a>
@@ -45,21 +45,24 @@
             </li>
 
             <li>
-                <a href="{{ path('admin_multimedia') }}" class="flex items-center px-4 py-2 rounded-md {% if app.request.get('_route') starts with 'admin_multimedia' %}bg-gray-700{% else %}hover:bg-gray-700{% endif %} transition">
+                <a href="{{ path('admin_multimedia') }}"
+                   class="flex items-center px-4 py-2 rounded-md {% if app.request.get('_route') starts with 'admin_multimedia' %}bg-gray-700{% else %}hover:bg-gray-700{% endif %} transition">
                     <i class="fas fa-image mr-3"></i>
                     <span>Multimédia</span>
                 </a>
             </li>
 
             <li>
-                <a href="{{ path('admin_messages') }}" class="flex items-center px-4 py-2 rounded-md {% if app.request.get('_route') starts with 'admin_messages' %}bg-gray-700{% else %}hover:bg-gray-700{% endif %} transition">
+                <a href="{{ path('admin_messages') }}"
+                   class="flex items-center px-4 py-2 rounded-md {% if app.request.get('_route') starts with 'admin_messages' %}bg-gray-700{% else %}hover:bg-gray-700{% endif %} transition">
                     <i class="fas fa-envelope mr-3"></i>
                     <span>Mensagens</span>
                 </a>
             </li>
 
             <li>
-                <a href="{{ path('admin_users') }}" class="flex items-center px-4 py-2 rounded-md {% if app.request.get('_route') starts with 'admin_users' %}bg-gray-700{% else %}hover:bg-gray-700{% endif %} transition">
+                <a href="{{ path('admin_users') }}"
+                   class="flex items-center px-4 py-2 rounded-md {% if app.request.get('_route') starts with 'admin_users' %}bg-gray-700{% else %}hover:bg-gray-700{% endif %} transition">
                     <i class="fas fa-users mr-3"></i>
                     <span>Utilizadores</span>
                 </a>
